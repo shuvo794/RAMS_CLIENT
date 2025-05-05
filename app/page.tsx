@@ -39,7 +39,8 @@ export default async function Home() {
       {/* <AboutUs /> */}
       {/* <OurPortfolio /> */}
       {/* <ClientsSlider />
-      <TestimonialSection /> */}
+       */}
+      <TestimonialSection />
     </main>
   );
 }

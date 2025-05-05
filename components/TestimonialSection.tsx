@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion"; // Added AnimatePresence
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BASE_URL, GET_TESTIMONIALS } from "@/lib/config";
 import { Loader2 } from "lucide-react";
@@ -18,9 +18,8 @@ interface Testimonial {
 
 export default function TestimonialSection() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  // Removed unused error state
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -31,7 +30,6 @@ export default function TestimonialSection() {
         }
         const data = await response.json();
         if (data && data.testimonials) {
-          // Sort by serial_number
           const sortedTestimonials = [...data.testimonials].sort(
             (a, b) => a.serial_number - b.serial_number
           );
@@ -39,7 +37,6 @@ export default function TestimonialSection() {
         }
       } catch (err) {
         console.error("Error fetching testimonials:", err);
-        console.error("Failed to load testimonials");
       } finally {
         setIsLoading(false);
       }
@@ -48,58 +45,98 @@ export default function TestimonialSection() {
     fetchTestimonials();
   }, []);
 
-  // Debug log to check if testimonials are loaded and activeIndex changes
-  useEffect(() => {
-    console.log(
-      "Testimonials:",
-      testimonials.length,
-      "Active Index:",
-      activeIndex
-    );
-  }, [testimonials, activeIndex]);
+  // Fallback testimonials if none are loaded
+  const fallbackTestimonials = [
+    {
+      id: 1,
+      name: "Sara Matt",
+      designation: "Customer",
+      review: "Fuisque tincidunt leo nisi, quis gravida elementum condimentum sit amet arcu in per. Vis in tritani debitis delicatissimi, error consequat eleifend cum ius, qui illud mucius constituto usu an. Mei rebum epicuri scaevola vix. An meam temporibus definitionem est.",
+      image: "/placeholder.svg?height=80&width=80",
+      serial_number: 1,
+    },
+    {
+      id: 2,
+      name: "Youmni Pat",
+      designation: "Customer",
+      review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in luctus consectetur. Phasmodium velit, aliquent est. In hac habitasse platea dictumst. Cras turpis malesuada porttitor et magna eius parturient metus.",
+      image: "/placeholder.svg?height=80&width=80",
+      serial_number: 2,
+    },
+    {
+      id: 3,
+      name: "Sheryn S",
+      designation: "Data Science Enthusiast",
+      review: "Nam rutrum, ante nec consequat volutpat, quam est sodales mauris, eget dignissim lacus sem at diam. Vivamus eget semper nisl. Nullam dignissim facilisi massa, eget aliquet massa vehicula sit.",
+      image: "/placeholder.svg?height=80&width=80",
+      serial_number: 3,
+    },
+    {
+      id: 4,
+      name: "Michael Dean",
+      designation: "IT Manager",
+      review: "Exceptional service and attention to detail. The team went above and beyond to ensure our project was delivered on time and within budget.",
+      image: "/placeholder.svg?height=80&width=80",
+      serial_number: 4,
+    },
+    {
+      id: 5,
+      name: "Jessica Wong",
+      designation: "Marketing Director",
+      review: "Their solutions have transformed our digital presence completely. We've seen a significant increase in engagement since implementing their recommendations.",
+      image: "/placeholder.svg?height=80&width=80",
+      serial_number: 5,
+    },
+  ];
 
-  const nextTestimonial = () => {
-    if (testimonials.length <= 1) return;
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  // Use the loaded testimonials or fallback if none are loaded
+  const displayTestimonials = testimonials.length > 0 ? testimonials : fallbackTestimonials;
+  
+  // Calculate total pages - showing 3 testimonials per page
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(displayTestimonials.length / itemsPerPage);
+  
+  // Get current page testimonials
+  const getCurrentPageItems = () => {
+    const startIndex = currentPage * itemsPerPage;
+    return displayTestimonials.slice(startIndex, startIndex + itemsPerPage);
   };
 
-  const prevTestimonial = () => {
-    if (testimonials.length <= 1) return;
-    setActiveIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
+  const nextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    } else {
+      setCurrentPage(0); // Loop back to first page
+    }
   };
 
-  // Fallback testimonial if none are loaded
-  const fallbackTestimonial = {
-    id: 0,
-    name: "Sarah Johnson",
-    designation: "CEO, TechVision Inc.",
-    review:
-      "BlueBay IT Solutions transformed our digital infrastructure completely. Their team's expertise in software development and IT consulting helped us streamline operations and increase efficiency by 40%.",
-    image: "/placeholder.svg?height=80&width=80",
-    serial_number: 0,
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    } else {
+      setCurrentPage(totalPages - 1); // Loop to last page
+    }
   };
-
-  // Use the current testimonial or fallback if none are loaded
-  const currentTestimonial =
-    testimonials.length > 0 ? testimonials[activeIndex] : fallbackTestimonial;
 
   if (isLoading) {
     return (
-      <section className="mt-10 mb-10 overflow-hidden">
+      <section className="py-16 bg-gradient-to-br from-blue-500 to-blue-700 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-[#0066FF] text-xl font-semibold mb-4">
-              TESTIMONIALS
+            <h2 className="text-xl font-semibold mb-4 uppercase tracking-wider">
+              Testimonials
             </h2>
             <h3 className="text-4xl font-bold relative inline-block pb-4">
-              What Our <span className="font-normal">Clients Say</span>
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0091cb]" />
+              Happy Clients <span className="font-normal">Feedback</span>
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-white" />
             </h3>
+            <p className="mt-4 max-w-2xl mx-auto text-blue-100">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis finibus mi et elit gravida, 
+              quis tincidunt purus fringilla. Aenean convallis a neque non pellentesque.
+            </p>
           </div>
-          <div className="flex justify-center items-center mt-10 mb-10">
-            <Loader2 className="w-10 h-10 animate-spin text-[#0066FF]" />
+          <div className="flex justify-center items-center h-64">
+            <Loader2 className="w-12 h-12 animate-spin text-white" />
           </div>
         </div>
       </section>
@@ -107,121 +144,120 @@ export default function TestimonialSection() {
   }
 
   return (
-    <section className="mt-10 mb-10 overflow-hidden">
+    <section className="py-16 bg-gradient-to-br from-blue-500 to-blue-700 text-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-[#0066FF] text-xl font-semibold mb-4">
-            TESTIMONIALS
+          <h2 className="text-xl font-semibold mb-4 uppercase tracking-wider">
+            Testimonials
           </h2>
           <h3 className="text-4xl font-bold relative inline-block pb-4">
-            What Our <span className="font-normal">Clients Say</span>
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0091cb]" />
+            Happy Clients <span className="font-normal">Feedback</span>
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-white" />
           </h3>
+          <p className="mt-4 max-w-2xl mx-auto text-blue-100">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis finibus mi et elit gravida, 
+            quis tincidunt purus fringilla. Aenean convallis a neque non pellentesque.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Image Column - Adjusted size to match testimonial card */}
-          <div className="relative lg:order-2">
-            <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#0066FF] rounded-full opacity-10 blur-xl" />
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#FF4B93] rounded-full opacity-10 blur-xl" />
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="relative rounded-lg overflow-hidden shadow-xl max-w-md mx-auto"
-              >
-                <div className="aspect-square relative">
-                  <Image
-                    src={
-                      currentTestimonial.image.startsWith("/media")
-                        ? `${BASE_URL}${currentTestimonial.image}`
-                        : "/placeholder.svg?height=600&width=600"
-                    }
-                    alt={currentTestimonial.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Testimonial Column */}
-          <div className="lg:order-1">
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg max-w-md mx-auto lg:ml-auto lg:mr-0">
-              <Quote className="absolute top-6 left-6 w-12 h-12 text-gray-200 dark:text-gray-700" />
-
-              <div className="relative z-10">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="min-h-[200px]"
-                  >
-                    <p
-                      className="text-gray-600 dark:text-gray-300 text-lg mb-6"
-                      dangerouslySetInnerHTML={{
-                        __html: currentTestimonial.review,
-                      }}
-                    ></p>
-
-                    <div className="flex items-center">
-                      <div className="mr-4">
-                        <div className="w-16 h-16 rounded-full bg-gray-200 overflow-hidden relative">
-                          <Image
-                            src={
-                              currentTestimonial.image.startsWith("/media")
-                                ? `${BASE_URL}${currentTestimonial.image}`
-                                : "/placeholder.svg?height=80&width=80"
-                            }
-                            alt={currentTestimonial.name}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-lg">
-                          {currentTestimonial.name}
-                        </h4>
-                        <p className="text-gray-500 dark:text-gray-400">
-                          {currentTestimonial.designation}
-                        </p>
+        <div className="relative max-w-6xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentPage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            >
+              {getCurrentPageItems().map((testimonial, index) => (
+                <div 
+                  key={testimonial.id} 
+                  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-full"
+                >
+                  <div className="mb-4 flex-grow">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
+                      {testimonial.review}
+                    </p>
+                  </div>
+                  
+                  <div className="mt-4 flex items-center">
+                    <div className="mr-3 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden relative">
+                        <Image
+                          src={
+                            testimonial.image.startsWith("/media")
+                              ? `${BASE_URL}${testimonial.image}`
+                              : testimonial.image
+                          }
+                          alt={testimonial.name}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
                     </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800 dark:text-white">{testimonial.name}</h4>
+                      <p className="text-blue-500 dark:text-blue-400 text-sm">{testimonial.designation}</p>
+                    </div>
+                    <div className="ml-auto">
+                      <div className="text-blue-500 bg-blue-100 dark:bg-blue-900 dark:text-blue-300 p-2 rounded-full">
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          width="16" 
+                          height="16" 
+                          fill="currentColor" 
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M12 12a1 1 0 0 0 .5-.13l3-1.5a1 1 0 1 0-.9-1.78L12 9.93V6a1 1 0 0 0-1.55-.83l-3 2a1 1 0 0 0-.45.83v4a1 1 0 0 0 1 1zM4 13a1 1 0 0 1-1-1V6a1 1 0 0 1 1.55-.83l3 2a1 1 0 0 1 .45.83v4a1 1 0 0 1-1 1z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
-            <div className="flex justify-center lg:justify-end mt-6 space-x-2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={prevTestimonial}
-                className="rounded-full"
-                disabled={testimonials.length <= 1}
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={nextTestimonial}
-                className="rounded-full"
-                disabled={testimonials.length <= 1}
-              >
-                <ChevronRight className="h-5 w-5" />
-              </Button>
-            </div>
+          {/* Navigation Controls */}
+          <div className="flex justify-center items-center mt-8 space-x-3">
+            {/* Page indicators */}
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentPage === index ? "bg-white scale-125" : "bg-white/30"
+                }`}
+                aria-label={`Go to page ${index + 1}`}
+              />
+            ))}
           </div>
+          
+          <div className="flex justify-center mt-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={prevPage}
+              className="mr-2 bg-white/10 hover:bg-white/20 border-none text-white rounded-md"
+            >
+              <ChevronLeft className="h-4 w-4 mr-1" />
+              Prev
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={nextPage}
+              className="bg-white/10 hover:bg-white/20 border-none text-white rounded-md"
+            >
+              Next
+              <ChevronRight className="h-4 w-4 ml-1" />
+            </Button>
+          </div>
+
+          {/* Background decorative elements */}
+          <div className="absolute -top-20 -left-20 w-64 h-64 bg-blue-300 rounded-full opacity-10 blur-3xl" />
+          <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-purple-300 rounded-full opacity-10 blur-3xl" />
         </div>
       </div>
     </section>
