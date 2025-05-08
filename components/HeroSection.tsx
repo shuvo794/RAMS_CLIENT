@@ -456,7 +456,7 @@ export default function HeroSection() {
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
       <section
-        className="flex flex-col-reverse lg:flex-row items-center justify-between px-8 py-16  text-white"
+        className="flex flex-col-reverse lg:flex-row items-center justify-between px-8 py-10  text-white"
         style={{ backgroundImage: "url('/bg-hr.png')" }}
       >
         {/* Text Content */}

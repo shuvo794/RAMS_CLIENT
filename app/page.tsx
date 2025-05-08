@@ -7,6 +7,7 @@ import ClientsSlider from "@/components/ClientsSlider";
 import TestimonialSection from "@/components/TestimonialSection";
 import OurToolkit from "@/components/OurToolkit";
 import OurPriceing from "@/components/OurPriceing";
+import { useState } from "react";
 
 export const metadata: Metadata = {
   title: "RAMS - Home",
