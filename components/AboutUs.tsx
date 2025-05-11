@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import { BASE_URL, GET_ABOUTS } from "@/lib/config";
 import { Loader2 } from "lucide-react";
+import Head from "next/head";
 
 interface About {
   id: number;
@@ -48,26 +49,39 @@ const getIconComponent = (iconName: string) => {
   return iconMap[iconName.toLowerCase()] || Lightbulb;
 };
 
-function AboutCard({ image, title, description, icon }: AboutCardProps) {
-  const Icon = getIconComponent(icon);
-
+function AboutCard({ image, title, description }: AboutCardProps) {
   return (
-    <Card className="overflow-hidden ">
-      <div className="relative h-48 md:h-40">
+    <Card className="relative overflow-hidden group">
+      {/* Hover Background Overlay */}
+      <div className="absolute inset-0 bg-[#2530bd] translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-0" />
+
+      {/* Image Container */}
+      <div className="relative h-48 md:h-40 z-10">
         <div className="absolute inset-0 w-full h-full flex items-center justify-center p-2">
+          {/* Default Image (Visible initially, hidden on hover) */}
           <Image
             src={image.startsWith("/media") ? `${BASE_URL}${image}` : image}
+            alt="default icon"
+            width={100}
+            height={100}
+            className="w-200 h-[100px] object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 absolute"
+          />
+
+          {/* Hover Image (Hidden initially, visible on hover) */}
+          <Image
+            src="/icon-5-light.svg"
             alt={title}
             width={100}
             height={100}
-            className="w-200 h-[100px] object-cover transition-transform duration-300 hover:scale-110"
+            className="w-200 h-[100px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 absolute group-hover:scale-110"
           />
         </div>
       </div>
-      <CardContent className="relative pt-6 pb-6 px-2 text-center">
+
+      <CardContent className="relative pt-6 pb-6 px-2 text-center z-10 transition duration-300 group-hover:text-white">
         <h3 className="text-xl font-bold mb-4">{title}</h3>
         <p
-          className="text-gray-600 leading-relaxed"
+          className="text-gray-600 leading-relaxed transition duration-300 group-hover:text-white"
           dangerouslySetInnerHTML={{ __html: description }}
         />
       </CardContent>
@@ -83,7 +97,7 @@ interface AboutUsProps {
 
 export default function AboutUs({
   title = "ABOUT US",
-  description = "Bluebay IT Limited, one of Bangladesh's largest recruiting & travel conglomerates, has been a pioneer in providing a global platform to the Bangladesh recruiting & Travel industry by enabling access to state of the art recruiting & travel automation technology.",
+  description = "[#2530bd]bay IT Limited, one of Bangladesh's largest recruiting & travel conglomerates, has been a pioneer in providing a global platform to the Bangladesh recruiting & Travel industry by enabling access to state of the art recruiting & travel automation technology.",
   backgroundImage = "/aboutus1.svg?height=1200&width=1920",
 }: AboutUsProps) {
   const [abouts, setAbouts] = useState<About[]>([]);
@@ -164,10 +178,26 @@ export default function AboutUs({
 
   return (
     <>
+      <Head>
+        <title>About Us | Rams</title>
+        <meta
+          name="description"
+          content="Discover why Rams is the top choice for clients seeking excellence in service and innovation."
+        />
+        <meta property="og:title" content="About Us | Rams" />
+        <meta
+          property="og:description"
+          content="Why the best choose to work with Rams. Explore our commitment to quality and innovation."
+        />
+        <meta property="og:image" content="/user-interface-img.png" />
+        <meta property="og:type" content="website" />
+      </Head>
+
       <section
+        aria-labelledby="about-heading"
         className="relative mt-10 mb-10 px-4"
         style={{
-          backgroundImage: `url(${backgroundImage})`,
+          backgroundImage: `url('/your-background-image.jpg')`, // Replace with `backgroundImage` variable if needed
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
           backgroundSize: "cover",
@@ -181,68 +211,82 @@ export default function AboutUs({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             {/* Image Illustration */}
             <div className="flex justify-center">
-              <img
+              <Image
                 src="/user-interface-img.png"
-                alt="Illustration"
+                alt="User interface illustration"
+                width={600}
+                height={400}
                 className="max-w-full h-auto"
+                priority
               />
             </div>
 
             {/* Text Content */}
-            <div>
+            <article>
               <p className="text-sm font-semibold text-[#3b2ccc] uppercase tracking-wide">
                 About Rams
               </p>
-              <h2 className="text-4xl font-extrabold mb-4">
+              <h2 id="about-heading" className="text-4xl font-extrabold mb-4">
                 Why the best choose to{" "}
                 <span className="italic text-[#3b2ccc]">work with us</span>
               </h2>
               <div className="w-16 h-1 bg-[#3b2ccc] mb-4" />
+
               <p className="text-gray-700 mb-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
                 sodales dictum viverra. Nam gravida dignissim eros. Vivamus
                 congue erat ante, volutpat dictum neque dignissim eget.
               </p>
-              <ul className="space-y-3 text-gray-800">
+
+              <ul className="space-y-3 text-gray-800 list-none">
                 <li className="flex items-start">
-                  <span className="text-[#3b2ccc] mr-2 mt-1">▣</span> Nullam
-                  placerat nunc id ornare convallis.
+                  <span className="text-[#3b2ccc] mr-2 mt-1">▣</span>
+                  Nullam placerat nunc id ornare convallis.
                 </li>
                 <li className="flex items-start">
-                  <span className="text-[#3b2ccc] mr-2 mt-1">▣</span> Mauris id
-                  dui aliquam, dapibus felis vel, iaculis risus.
+                  <span className="text-[#3b2ccc] mr-2 mt-1">▣</span>
+                  Mauris id dui aliquam, dapibus felis vel, iaculis risus.
                 </li>
                 <li className="flex items-start">
-                  <span className="text-[#3b2ccc] mr-2 mt-1">▣</span> Integer
-                  dapibus lorem in nisl hendrerit dictum.
+                  <span className="text-[#3b2ccc] mr-2 mt-1">▣</span>
+                  Integer dapibus lorem in nisl hendrerit dictum.
                 </li>
               </ul>
-              <button className="mt-6 bg-[#3b2ccc] text-white px-6 py-3 rounded shadow hover:bg-[#291ba2] transition">
+
+              <button
+                className="mt-6 bg-[#3b2ccc] text-white px-6 py-3 rounded shadow hover:bg-[#291ba2] transition"
+                aria-label="Purchase now"
+              >
                 PURCHASE NOW
               </button>
-            </div>
+            </article>
           </div>
         </div>
       </section>
 
-      {/* Background Overlay */}
-      <div className="absolute inset-0 bg-white/90" />
-
-      <div className="container mx-auto relative z-10">
+      <section
+        aria-label="Cards Section"
+        className="container mx-auto relative z-10"
+      >
         {isLoading ? (
-          <div className="flex justify-center items-center mt-10 mb-10">
+          <div
+            className="flex justify-center items-center mt-10 mb-10"
+            aria-busy="true"
+          >
             <Loader2 className="w-10 h-10 animate-spin text-[#0066FF]" />
           </div>
         ) : error ? (
-          <div className="text-center text-red-500 py-8">{error}</div>
+          <div className="text-center text-red-500 py-8" role="alert">
+            {error}
+          </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 mb-12">
             {displayCards.map((card, index) => (
               <AboutCard key={index} {...card} />
             ))}
           </div>
         )}
-      </div>
+      </section>
     </>
   );
 }
