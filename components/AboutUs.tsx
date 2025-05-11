@@ -16,6 +16,7 @@ import Image from "next/image";
 import { BASE_URL, GET_ABOUTS } from "@/lib/config";
 import { Loader2 } from "lucide-react";
 import Head from "next/head";
+import ClientsSlider from "./ClientsSlider";
 
 interface About {
   id: number;
@@ -33,25 +34,9 @@ interface AboutCardProps {
   icon: string;
 }
 
-// Map icon strings to Lucide icons
-const getIconComponent = (iconName: string) => {
-  const iconMap: Record<string, React.ElementType> = {
-    mission: MessageCircle,
-    plan: FileText,
-    vision: Eye,
-    briefcase: Briefcase,
-    target: Target,
-    lightbulb: Lightbulb,
-    // Add more mappings as needed
-  };
-
-  // Default to Lightbulb if icon not found
-  return iconMap[iconName.toLowerCase()] || Lightbulb;
-};
-
 function AboutCard({ image, title, description }: AboutCardProps) {
   return (
-    <Card className="relative overflow-hidden group">
+    <Card className="relative p-4 overflow-hidden group">
       {/* Hover Background Overlay */}
       <div className="absolute inset-0 bg-[#2530bd] translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-0" />
 
@@ -196,13 +181,6 @@ export default function AboutUs({
       <section
         aria-labelledby="about-heading"
         className="relative mt-10 mb-10 px-4"
-        style={{
-          backgroundImage: `url('/your-background-image.jpg')`, // Replace with `backgroundImage` variable if needed
-          backgroundAttachment: "fixed",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
       >
         {/* Background Overlay */}
         <div className="absolute inset-0 bg-white/90" />
@@ -286,6 +264,8 @@ export default function AboutUs({
             ))}
           </div>
         )}
+
+        <ClientsSlider />
       </section>
     </>
   );

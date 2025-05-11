@@ -8,7 +8,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import AutoplayPlugin from "embla-carousel-autoplay";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { GET_SERVICE_SLIDER } from "@/lib/config";
+import { BASE_URL, GET_SERVICE_SLIDER } from "@/lib/config";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -16,6 +16,7 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import type { IconProp, IconName } from "@fortawesome/fontawesome-svg-core";
+import Image from "next/image";
 
 // Add all icons to the library
 library.add(fas, far, fab);
@@ -26,7 +27,6 @@ interface ServiceSlider {
   subtitle?: string;
   image: string;
   details: string;
-  icon?: string; // <-- notice it's now optional `?`
   serial_number: number;
   slug?: string;
 }
@@ -227,7 +227,7 @@ export default function OurServices() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="overflow-hidden border-none shadow-lg relative group transition-all duration-300 hover:bg-gradient-to-b hover:from-[#0066FF] hover:to-[#3d61d9] hover:text-white">
+              {/* <Card className="overflow-hidden border-none shadow-lg relative group transition-all duration-300 hover:bg-gradient-to-b hover:from-[#0066FF] hover:to-[#3d61d9] hover:text-white">
                 <CardContent className="flex flex-col justify-between items-center text-center p-6 h-full">
                   <div className="mb-6 w-24 h-24 relative">
                     {service.icon && (
@@ -247,18 +247,47 @@ export default function OurServices() {
                       dangerouslySetInnerHTML={{ __html: service.details }}
                     />
                   </div>
+                </CardContent>
+              </Card> */}
 
-                  {/* <div className="mt-4">
-                    <Link href={getServiceHref(service)}>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="text-gray-600 group-hover:text-[#008fca]"
-                      >
-                        <ChevronRight />
-                      </Button>
-                    </Link>
-                  </div> */}
+              <Card className="relative overflow-hidden group">
+                {/* Hover Background Overlay */}
+                <div className="absolute inset-0 bg-[#2530bd] translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-0" />
+
+                {/* Image Container */}
+                <div className="relative h-48 md:h-40 z-10">
+                  <div className="absolute inset-0 w-full h-full flex items-center justify-center p-2">
+                    {/* Default Image */}
+                    <Image
+                      src={
+                        service.image?.startsWith("/media")
+                          ? `${BASE_URL}${service.image}`
+                          : service.image
+                      }
+                      alt="default icon"
+                      width={100}
+                      height={100}
+                      className="w-[100px] h-[100px] object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 absolute"
+                    />
+
+                    {/* Hover Image */}
+                    <Image
+                      src="/icon-5-light.svg"
+                      alt={service.title}
+                      width={100}
+                      height={100}
+                      className="w-[100px] h-[100px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 absolute transform group-hover:scale-110"
+                    />
+                  </div>
+                </div>
+
+                {/* Card Content */}
+                <CardContent className="relative pt-6 pb-6 px-2 text-center z-10 transition duration-300 group-hover:text-white">
+                  <h3 className="text-xl font-bold mb-4">{service.title}</h3>
+                  <p
+                    className="text-gray-600 leading-relaxed transition duration-300 group-hover:text-white"
+                    dangerouslySetInnerHTML={{ __html: service.details }}
+                  />
                 </CardContent>
               </Card>
             </motion.div>

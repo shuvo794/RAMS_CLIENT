@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { BASE_URL, GET_CLIENTS } from "@/lib/config";
+import { BASE_URL, GET_CLIENTS, GET_CLIENTS_ALL } from "@/lib/config";
 import { Loader2 } from "lucide-react";
 
 interface Client {
@@ -16,12 +16,12 @@ export default function ClientsSlider() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isPaused, setIsPaused] = useState(false);
-
+  console.log("fvgkfjdghkfdjghdfkjh", clients);
   // Fetch clients data
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await fetch(GET_CLIENTS);
+        const response = await fetch(GET_CLIENTS_ALL);
         if (!response.ok) {
           throw new Error("Failed to fetch clients");
         }
@@ -91,7 +91,7 @@ export default function ClientsSlider() {
             </h2>
             <h3 className="text-4xl font-bold relative inline-block pb-4">
               Our <span className="font-normal">valuable customers</span>
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0091cb]" />
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0066FF]" />
             </h3>
           </div>
           <div className="flex justify-center items-center mt-10 mb-10">
@@ -125,11 +125,11 @@ export default function ClientsSlider() {
     <section className="py-16 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-[#0066FF] text-xl font-semibold mb-4">CLIENTS</h2>
-          <h3 className="text-4xl font-bold relative inline-block pb-4">
-            Our <span className="font-normal">valuable customers</span>
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0091cb]" />
-          </h3>
+          <h2 id="about-heading" className="text-4xl font-extrabold mb-4">
+            Trusted by many{" "}
+            <span className="italic text-[#3b2ccc]">companies</span>
+          </h2>
+          <div className="absolute  left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0066FF]" />
         </div>
 
         <div className="relative overflow-hidden">
@@ -137,7 +137,6 @@ export default function ClientsSlider() {
           <div className="absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-gray-50 to-transparent dark:from-gray-900"></div>
           <div className="absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-gray-50 to-transparent dark:from-gray-900"></div>
 
-          {/* Slider container with CSS animation */}
           <div
             className="overflow-hidden"
             onMouseEnter={() => setIsPaused(true)}

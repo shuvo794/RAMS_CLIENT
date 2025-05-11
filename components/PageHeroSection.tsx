@@ -12,7 +12,7 @@ interface PageHeroSectionProps {
 
 export default function PageHeroSection({
   title,
-  backgroundImage = "/services.jpg",
+  backgroundImage = "/half-circle-bg.png",
   breadcrumbs = [
     { label: "HOME", href: "/" },
     { label: "PAGES", href: "#" },
@@ -23,14 +23,13 @@ export default function PageHeroSection({
       className="relative h-[300px] flex items-center justify-center"
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundAttachment: "fixed",
+        backgroundAttachment: "scroll", // Changed from fixed to scroll
         backgroundPosition: "center",
-        backgroundSize: "cover",
+        backgroundSize: "100% 100%", // Changed from cover to 100% width and height
         backgroundRepeat: "no-repeat",
       }}
     >
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4">

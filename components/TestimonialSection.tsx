@@ -179,7 +179,10 @@ export default function TestimonialSection() {
               className="grid grid-cols-1 md:grid-cols-3 gap-6"
             >
               {getCurrentPageItems().map((testimonial, index) => (
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-12 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-full relative">
+                <div
+                  className="bg-white dark:bg-gray-800 rounded-lg p-12 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-full relative"
+                  key={index}
+                >
                   <div className="mb-4 flex-grow text-center">
                     <p
                       className="italic text-gray-600 dark:text-gray-300 text-sm md:text-sm"

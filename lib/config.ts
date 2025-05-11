@@ -14,5 +14,7 @@ export const GET_PORTFOLIOID = `${BASE_URL}/portfolio/api/v1/portfolio/`;
 export const GET_TESTIMONIALS = `${BASE_URL}/testimonial/api/v1/testimonial/all/`;
 export const GET_GALLERIES = `${BASE_URL}/gallery/api/v1/gallery/all/`;
 export const GET_CLIENTS = `${BASE_URL}/client/api/v1/client/all/`;
+export const GET_CLIENTS_ALL = `${BASE_URL}/client/api/v1/client/without_pagination/all/`;
+
 export const GET_CLIENTS_DETAILS = `${BASE_URL}/client/api/v1/client/without_pagination/all/`;
 export const GET_ABOUTS = `${BASE_URL}/about/api/v1/about/all/`;
