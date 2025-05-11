@@ -52,24 +52,19 @@ function AboutCard({ image, title, description, icon }: AboutCardProps) {
   const Icon = getIconComponent(icon);
 
   return (
-    <Card className="overflow-hidden">
-      <div className="relative h-48 md:h-56">
-        <div className="absolute inset-0 w-full h-full flex items-center justify-center p-4">
+    <Card className="overflow-hidden ">
+      <div className="relative h-48 md:h-40">
+        <div className="absolute inset-0 w-full h-full flex items-center justify-center p-2">
           <Image
             src={image.startsWith("/media") ? `${BASE_URL}${image}` : image}
             alt={title}
-            width={200}
-            height={200}
-            className="w-full h-[250px] object-cover transition-transform duration-300 hover:scale-110"
+            width={100}
+            height={100}
+            className="w-200 h-[100px] object-cover transition-transform duration-300 hover:scale-110"
           />
         </div>
       </div>
-      <CardContent className="relative pt-12 pb-6 px-4 text-center">
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2">
-          <div className="w-16 h-16 rounded-full bg-[#0091cb] flex items-center justify-center">
-            <Icon className="w-8 h-8 text-white" />
-          </div>
-        </div>
+      <CardContent className="relative pt-6 pb-6 px-2 text-center">
         <h3 className="text-xl font-bold mb-4">{title}</h3>
         <p
           className="text-gray-600 leading-relaxed"
@@ -168,30 +163,72 @@ export default function AboutUs({
       : fallbackCards;
 
   return (
-    <section
-      className="relative mt-10 mb-10 px-4"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundAttachment: "fixed",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <>
+      <section
+        className="relative mt-10 mb-10 px-4"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Background Overlay */}
+        <div className="absolute inset-0 bg-white/90" />
+
+        <div className="container mx-auto relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            {/* Image Illustration */}
+            <div className="flex justify-center">
+              <img
+                src="/user-interface-img.png"
+                alt="Illustration"
+                className="max-w-full h-auto"
+              />
+            </div>
+
+            {/* Text Content */}
+            <div>
+              <p className="text-sm font-semibold text-[#3b2ccc] uppercase tracking-wide">
+                About Rams
+              </p>
+              <h2 className="text-4xl font-extrabold mb-4">
+                Why the best choose to{" "}
+                <span className="italic text-[#3b2ccc]">work with us</span>
+              </h2>
+              <div className="w-16 h-1 bg-[#3b2ccc] mb-4" />
+              <p className="text-gray-700 mb-6">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                sodales dictum viverra. Nam gravida dignissim eros. Vivamus
+                congue erat ante, volutpat dictum neque dignissim eget.
+              </p>
+              <ul className="space-y-3 text-gray-800">
+                <li className="flex items-start">
+                  <span className="text-[#3b2ccc] mr-2 mt-1">▣</span> Nullam
+                  placerat nunc id ornare convallis.
+                </li>
+                <li className="flex items-start">
+                  <span className="text-[#3b2ccc] mr-2 mt-1">▣</span> Mauris id
+                  dui aliquam, dapibus felis vel, iaculis risus.
+                </li>
+                <li className="flex items-start">
+                  <span className="text-[#3b2ccc] mr-2 mt-1">▣</span> Integer
+                  dapibus lorem in nisl hendrerit dictum.
+                </li>
+              </ul>
+              <button className="mt-6 bg-[#3b2ccc] text-white px-6 py-3 rounded shadow hover:bg-[#291ba2] transition">
+                PURCHASE NOW
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Background Overlay */}
       <div className="absolute inset-0 bg-white/90" />
 
       <div className="container mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl text-[#f26849] font-bold mb-6 relative inline-block">
-            {title}
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0091cb]" />
-          </h2>
-          <p className="max-w-4xl mx-auto text-gray-600 leading-relaxed">
-            {description}
-          </p>
-        </div>
-
         {isLoading ? (
           <div className="flex justify-center items-center mt-10 mb-10">
             <Loader2 className="w-10 h-10 animate-spin text-[#0066FF]" />
@@ -206,6 +243,6 @@ export default function AboutUs({
           </div>
         )}
       </div>
-    </section>
+    </>
   );
 }

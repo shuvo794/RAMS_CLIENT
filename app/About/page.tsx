@@ -7,7 +7,7 @@ const page = () => {
     <div>
       <PageHeroSection
         title="About Us"
-        backgroundImage="/about.svg?height=800&width=1600"
+        backgroundImage="/about.svg?height=200&width=600"
         breadcrumbs={[
           { label: "HOME", href: "/" },
           { label: "AboutUs", href: "/About" },

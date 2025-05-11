@@ -102,7 +102,7 @@ export default function FooterSection() {
       <div className="bg-[#262fbc] text-gray-400 py-4">
         <div className="container mx-auto flex items-center justify-center px-4">
           <p className="text-sm text-center">
-            © 2024{" "}
+            © 2025{" "}
             <span className="text-white font-semibold">Bluebay IT Limited</span>
             . All Rights Reserved.
           </p>

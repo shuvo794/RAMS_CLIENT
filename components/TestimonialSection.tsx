@@ -51,7 +51,8 @@ export default function TestimonialSection() {
       id: 1,
       name: "Sara Matt",
       designation: "Customer",
-      review: "Fuisque tincidunt leo nisi, quis gravida elementum condimentum sit amet arcu in per. Vis in tritani debitis delicatissimi, error consequat eleifend cum ius, qui illud mucius constituto usu an. Mei rebum epicuri scaevola vix. An meam temporibus definitionem est.",
+      review:
+        "Fuisque tincidunt leo nisi, quis gravida elementum condimentum sit amet arcu in per. Vis in tritani debitis delicatissimi, error consequat eleifend cum ius, qui illud mucius constituto usu an. Mei rebum epicuri scaevola vix. An meam temporibus definitionem est.",
       image: "/placeholder.svg?height=80&width=80",
       serial_number: 1,
     },
@@ -59,7 +60,8 @@ export default function TestimonialSection() {
       id: 2,
       name: "Youmni Pat",
       designation: "Customer",
-      review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in luctus consectetur. Phasmodium velit, aliquent est. In hac habitasse platea dictumst. Cras turpis malesuada porttitor et magna eius parturient metus.",
+      review:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in luctus consectetur. Phasmodium velit, aliquent est. In hac habitasse platea dictumst. Cras turpis malesuada porttitor et magna eius parturient metus.",
       image: "/placeholder.svg?height=80&width=80",
       serial_number: 2,
     },
@@ -67,7 +69,8 @@ export default function TestimonialSection() {
       id: 3,
       name: "Sheryn S",
       designation: "Data Science Enthusiast",
-      review: "Nam rutrum, ante nec consequat volutpat, quam est sodales mauris, eget dignissim lacus sem at diam. Vivamus eget semper nisl. Nullam dignissim facilisi massa, eget aliquet massa vehicula sit.",
+      review:
+        "Nam rutrum, ante nec consequat volutpat, quam est sodales mauris, eget dignissim lacus sem at diam. Vivamus eget semper nisl. Nullam dignissim facilisi massa, eget aliquet massa vehicula sit.",
       image: "/placeholder.svg?height=80&width=80",
       serial_number: 3,
     },
@@ -75,7 +78,8 @@ export default function TestimonialSection() {
       id: 4,
       name: "Michael Dean",
       designation: "IT Manager",
-      review: "Exceptional service and attention to detail. The team went above and beyond to ensure our project was delivered on time and within budget.",
+      review:
+        "Exceptional service and attention to detail. The team went above and beyond to ensure our project was delivered on time and within budget.",
       image: "/placeholder.svg?height=80&width=80",
       serial_number: 4,
     },
@@ -83,19 +87,21 @@ export default function TestimonialSection() {
       id: 5,
       name: "Jessica Wong",
       designation: "Marketing Director",
-      review: "Their solutions have transformed our digital presence completely. We've seen a significant increase in engagement since implementing their recommendations.",
+      review:
+        "Their solutions have transformed our digital presence completely. We've seen a significant increase in engagement since implementing their recommendations.",
       image: "/placeholder.svg?height=80&width=80",
       serial_number: 5,
     },
   ];
 
   // Use the loaded testimonials or fallback if none are loaded
-  const displayTestimonials = testimonials.length > 0 ? testimonials : fallbackTestimonials;
-  
+  const displayTestimonials =
+    testimonials.length > 0 ? testimonials : fallbackTestimonials;
+
   // Calculate total pages - showing 3 testimonials per page
   const itemsPerPage = 3;
   const totalPages = Math.ceil(displayTestimonials.length / itemsPerPage);
-  
+
   // Get current page testimonials
   const getCurrentPageItems = () => {
     const startIndex = currentPage * itemsPerPage;
@@ -131,8 +137,9 @@ export default function TestimonialSection() {
               <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-white" />
             </h3>
             <p className="mt-4 max-w-2xl mx-auto text-blue-100">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis finibus mi et elit gravida, 
-              quis tincidunt purus fringilla. Aenean convallis a neque non pellentesque.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+              finibus mi et elit gravida, quis tincidunt purus fringilla. Aenean
+              convallis a neque non pellentesque.
             </p>
           </div>
           <div className="flex justify-center items-center h-64">
@@ -155,8 +162,9 @@ export default function TestimonialSection() {
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-white" />
           </h3>
           <p className="mt-4 max-w-2xl mx-auto text-blue-100">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis finibus mi et elit gravida, 
-            quis tincidunt purus fringilla. Aenean convallis a neque non pellentesque.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+            finibus mi et elit gravida, quis tincidunt purus fringilla. Aenean
+            convallis a neque non pellentesque.
           </p>
         </div>
 
@@ -171,47 +179,34 @@ export default function TestimonialSection() {
               className="grid grid-cols-1 md:grid-cols-3 gap-6"
             >
               {getCurrentPageItems().map((testimonial, index) => (
-                <div 
-                  key={testimonial.id} 
-                  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-full"
-                >
-                  <div className="mb-4 flex-grow">
-                    <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
-                      {testimonial.review}
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-12 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-full relative">
+                  <div className="mb-4 flex-grow text-center">
+                    <p
+                      className="italic text-gray-600 dark:text-gray-300 text-sm md:text-sm"
+                      dangerouslySetInnerHTML={{ __html: testimonial.review }}
+                    ></p>
+                  </div>
+
+                  <div className="mt-4 text-center">
+                    <h4 className="font-bold text-gray-800 dark:text-white">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">
+                      {testimonial.designation}
                     </p>
                   </div>
-                  
-                  <div className="mt-4 flex items-center">
-                    <div className="mr-3 flex-shrink-0">
-                      <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden relative">
-                        <Image
-                          src={
-                            testimonial.image.startsWith("/media")
-                              ? `${BASE_URL}${testimonial.image}`
-                              : testimonial.image
-                          }
-                          alt={testimonial.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-800 dark:text-white">{testimonial.name}</h4>
-                      <p className="text-blue-500 dark:text-blue-400 text-sm">{testimonial.designation}</p>
-                    </div>
-                    <div className="ml-auto">
-                      <div className="text-blue-500 bg-blue-100 dark:bg-blue-900 dark:text-blue-300 p-2 rounded-full">
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          width="16" 
-                          height="16" 
-                          fill="currentColor" 
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M12 12a1 1 0 0 0 .5-.13l3-1.5a1 1 0 1 0-.9-1.78L12 9.93V6a1 1 0 0 0-1.55-.83l-3 2a1 1 0 0 0-.45.83v4a1 1 0 0 0 1 1zM4 13a1 1 0 0 1-1-1V6a1 1 0 0 1 1.55-.83l3 2a1 1 0 0 1 .45.83v4a1 1 0 0 1-1 1z"/>
-                        </svg>
-                      </div>
+
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                    <div className="p-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M6.854 3.146a.5.5 0 0 1 .146.354v3.5a.5.5 0 0 1-.5.5H5v1h1.5a.5.5 0 0 1 0 1H5a1 1 0 0 1-1-1V3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .354.146zM11.854 3.146a.5.5 0 0 1 .146.354v3.5a.5.5 0 0 1-.5.5H10v1h1.5a.5.5 0 0 1 0 1H10a1 1 0 0 1-1-1V3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .354.146z" />
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -233,7 +228,7 @@ export default function TestimonialSection() {
               />
             ))}
           </div>
-          
+
           <div className="flex justify-center mt-4">
             <Button
               variant="outline"
