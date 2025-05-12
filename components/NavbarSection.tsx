@@ -14,12 +14,10 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "./DarkMode";
 import { GET_SERVICE_SLIDER } from "@/lib/config";
 
 interface Service {
@@ -114,7 +112,7 @@ export default function NavbarSection() {
                 { href: "/", label: "HOME" },
                 { href: "/About", label: "ABOUT" },
                 { href: "/Blog", label: "BLOG" },
-                { href: "/", label: "PRICING" },
+                { href: "/pricing", label: "PRICING" },
                 { href: "/contactus", label: "CONTACT US" },
                 { href: "/Clients", label: "ClIENTS" },
               ].map(({ href, label }) => (

@@ -2,9 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { BASE_URL, GET_HOMEPAGE_SLIDER } from "@/lib/config";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "./ui/button";
+import { GET_HOMEPAGE_SLIDER } from "@/lib/config";
 
 // Update the interface to handle multiple sliders
 interface HomepageSlider {

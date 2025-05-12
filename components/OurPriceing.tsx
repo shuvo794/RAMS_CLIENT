@@ -55,7 +55,7 @@ export default function OurPriceing() {
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {plans.map((plan, index) => (
+          {plans.map((plan) => (
             <div
               key={plan.name}
               className={`rounded-lg overflow-hidden shadow-lg transform ${

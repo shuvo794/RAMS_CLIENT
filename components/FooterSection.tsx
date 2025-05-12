@@ -5,9 +5,9 @@ import { MapPin, Mail, Phone, Facebook, Twitter, Linkedin } from "lucide-react";
 const companyLinks = [
   { title: "HOME", href: "/" },
   { title: "About", href: "/About" },
-  { title: "Services", href: "/services" },
-  { title: "Portfolio", href: "/portfolio" },
-  { title: "Contact Us", href: "/Contactus" },
+  { title: "Blog", href: "/Blog" },
+  { title: "PRICING", href: "/pricing" },
+  { title: "CONTACT US", href: "/Contactus" },
 ];
 
 export default function FooterSection() {
@@ -48,6 +48,10 @@ export default function FooterSection() {
                   </a>
                 );
               })}
+            </div>
+            {/* Download */}
+            <div className="mt-4 sm:mt-0 flex  gap-4">
+              <h3 className="text-xl font-bold mb-6">Download the App</h3>
             </div>
           </div>
 

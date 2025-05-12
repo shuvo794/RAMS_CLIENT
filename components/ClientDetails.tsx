@@ -23,28 +23,6 @@ export default function ClientsDetails() {
   const [clients, setClients] = useState<Client[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchImages = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `${BASE_URL}/cms_menu_content_image/api/v1/cms_menu_content_image/without_pagination/all/`
-  //       );
-  //       const data = await response.json();
-  //       const brandImages = data.content_images.filter(
-  //         (img: ContentImage) => img.head === "Brand"
-  //       );
-  //       console.log("brandImages", brandImages);
-  //       setImages(brandImages);
-  //     } catch (error) {
-  //       console.error("Error fetching images:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchImages();
-  // }, []);
-
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -81,7 +59,7 @@ export default function ClientsDetails() {
     <section className="mt-10 mb-10">
       <div className="container mx-auto px-4">
         <div className="flex justify-center md:block">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {clients.map((image, index) => (
               <motion.div
                 key={image.id}

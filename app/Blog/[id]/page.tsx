@@ -218,21 +218,18 @@ export default function BlogItemPage() {
 
               {/* Free Text */}
               <div className="bg-white p-4 rounded shadow mb-6">
-                <h3 className="text-lg font-bold border-b border-blue-500 inline-block pb-1 mb-4">
+                <h3 className="text-lg font-bold border-b text-[#2f32c5] border-blue-500 inline-block pb-1 mb-4">
                   Free Text
                 </h3>
                 <p className="text-gray-700 mb-2">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
                   vel odio vitae nisl venenatis ultricies.
                 </p>
-                <a href="#" className="text-blue-600 hover:underline text-sm">
-                  Read More
-                </a>
               </div>
 
               {/* Categories */}
               <div className="bg-white p-4 rounded shadow mb-6">
-                <h3 className="text-lg font-bold border-b border-blue-500 inline-block pb-1 mb-4">
+                <h3 className="text-lg font-bold border-b text-[#2f32c5] border-blue-500 inline-block pb-1 mb-4">
                   Categories
                 </h3>
                 <ul className="divide-y divide-gray-100">
@@ -243,7 +240,9 @@ export default function BlogItemPage() {
                         className="flex items-center justify-between text-gray-700 hover:text-blue-600"
                       >
                         <span>{category.name}</span>
-                        <span className="text-gray-500 text-sm">&gt;</span>
+                        <span className="text-[#3752d3] font-bold text-sm">
+                          &gt;
+                        </span>
                       </a>
                     </li>
                   ))}

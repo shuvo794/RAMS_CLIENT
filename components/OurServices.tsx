@@ -2,15 +2,11 @@
 
 import * as React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoplayPlugin from "embla-carousel-autoplay";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { BASE_URL, GET_SERVICE_SLIDER } from "@/lib/config";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
@@ -81,10 +77,10 @@ export default function OurServices() {
     }
   }, [emblaApi]);
 
-  const scrollTo = React.useCallback(
-    (index: number) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi]
-  );
+  // const scrollTo = React.useCallback(
+  //   (index: number) => emblaApi && emblaApi.scrollTo(index),
+  //   [emblaApi]
+  // );
 
   // Fallback services data if API fails
   // const fallbackServices = [
@@ -174,13 +170,13 @@ export default function OurServices() {
   const displayServices = serviceSliders.length > 0 ? serviceSliders : [];
 
   // Generate href based on title if slug is not available
-  const getServiceHref = (service: ServiceSlider) => {
-    if (service.slug) {
-      return `/services/${service.slug}`;
-    }
-    // Convert title to slug format
-    return `/services/${service.slug}`;
-  };
+  // const getServiceHref = (service: ServiceSlider) => {
+  //   if (service.slug) {
+  //     return `/services/${service.slug}`;
+  //   }
+  //   // Convert title to slug format
+  //   return `/services/${service.slug}`;
+  // };
 
   if (isLoading) {
     return (
