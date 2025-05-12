@@ -454,34 +454,50 @@ export default function HeroSection() {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section
-        className="flex flex-col-reverse lg:flex-row items-center justify-between px-8 py-10  text-white"
-        style={{ backgroundImage: "url('/bg-hr.png')" }}
+      <div
+        className="relative"
+        style={{ backgroundImage: 'url("/bg-hr.png")' }}
       >
-        {/* Text Content */}
-        <div className="max-w-xl">
-          <h1 className="text-4xl font-bold mb-4">
-            Efficient RAMS Solutions for <br /> Modern Workforces
-          </h1>
-          <p className="mb-6 text-lg">
-            Unlock the potential of streamlined workforce solutions with Doob.
-            Digitalize and simplify your RAMS processes with our modern,
-            cloud-based platform that adapts to your business needs.
-          </p>
-        </div>
+        <section className="w-full min-h-screen py-40 bg-cover bg-center">
+          <div className="container mx-auto pl-11 pr-6">
+            <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
+              {/* Left Text Content */}
+              <div className="w-full lg:w-1/2">
+                <div className="mb-6">
+                  <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white">
+                    Efficient Rams Solutions for{" "}
+                    <span className="text-white">Modern Workforces</span>
+                  </h1>
+                </div>
+                <div>
+                  <p className="text-lg leading-relaxed text-white">
+                    In today's fast-paced business environment, efficiency is
+                    key. Our HR solutions are crafted to streamline your
+                    processes, from recruitment to retirement. Experience a
+                    seamless workflow that enhances productivity, reduces
+                    administrative overhead, and empowers your team to focus on
+                    what matters most – driving success.
+                  </p>
+                </div>
+              </div>
 
-        {/* Illustration */}
-        <div className="mb-8 lg:mb-0">
-          <Image
-            src="/hero-hr.png" // Replace with your actual image
-            alt="Illustration"
-            width={500}
-            height={400}
-            className="rounded-lg "
-          />
-        </div>
-      </section>
+              {/* Right Image */}
+              <div className="w-full lg:w-1/2">
+                <div className="relative w-full h-[100vh] lg:h-[80vh]">
+                  <Image
+                    src="/hero-hr.png"
+                    alt="HR Illustration"
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

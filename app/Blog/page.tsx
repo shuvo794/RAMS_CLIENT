@@ -3,25 +3,25 @@ import PageHeroSection from "@/components/PageHeroSection";
 import Category2 from "@/components/Category2";
 
 export const metadata: Metadata = {
-  title: "Our Portfolio",
+  title: "Our Blog",
   description:
     "Explore our diverse range of successful IT projects and solutions",
   openGraph: {
-    title: "RAMS - Our Portfolio",
+    title: "RAMS - Our Blog",
     description:
       "Explore our diverse range of successful IT projects and solutions",
     images: [
       {
-        url: "/api/og?title=Our Portfolio&description=Explore our diverse range of successful IT projects and solutions",
+        url: "/api/og?title=Our Blog&description=Explore our diverse range of successful IT projects and solutions",
       },
     ],
   },
   twitter: {
-    title: "RAMS - Our Portfolio",
+    title: "RAMS - Our Blog",
     description:
       "Explore our diverse range of successful IT projects and solutions",
     images: [
-      "/api/og?title=Our Portfolio&description=Explore our diverse range of successful IT projects and solutions",
+      "/api/og?title=Our Blog&description=Explore our diverse range of successful IT projects and solutions",
     ],
   },
 };
@@ -36,24 +36,24 @@ export const metadata: Metadata = {
 //       throw new Error("Failed to fetch categories");
 //     }
 //     const data = await response.json();
-//     return data.portfolio_categories || [];
+//     return data.blog_categories || [];
 //   } catch (error) {
 //     console.error("Error fetching categories:", error);
 //     return [];
 //   }
 // }
 
-export default async function PortfolioPage() {
+export default async function BlogPage() {
   // const categories = await getCategories();
 
   return (
     <>
       <PageHeroSection
-        title="Our Portfolio"
-        backgroundImage="/placeholder.svg?height=800&width=1600"
+        title="Our Blog"
+        backgroundImage="/half-circle-bg.png" // Make sure this path and file exist
         breadcrumbs={[
           { label: "HOME", href: "/" },
-          { label: "PORTFOLIO", href: "/portfolio" },
+          { label: "BLOG", href: "/blog" },
         ]}
       />
 
@@ -61,11 +61,11 @@ export default async function PortfolioPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-[#0066FF] text-xl font-semibold mb-4">
-              OUR PORTFOLIO
+              OUR BLOG
             </h2>
-            <h3 className="text-4xl font-bold">
+            {/* <h3 className="text-4xl font-bold">
               Latest & <span className="font-normal">Greatest Projects</span>
-            </h3>
+            </h3> */}
           </div>
 
           <Category2 />

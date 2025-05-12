@@ -7,13 +7,13 @@ const page = () => {
     <div>
       <PageHeroSection
         title="OUR CLIENTS"
-        backgroundImage="/services.jpg?height=800&width=1600"
+        backgroundImage="/half-circle-bg.png"
         breadcrumbs={[
           { label: "HOME", href: "/" },
           { label: "CLIENTS", href: "/Clients" },
         ]}
       />
-      <ClientsDetails/>
+      <ClientsDetails />
     </div>
   );
 };

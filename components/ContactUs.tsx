@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Mail, Phone, Facebook, Twitter, Linkedin } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -16,7 +16,6 @@ export default function ContactUs() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
     console.log(formData);
   };
 
@@ -32,13 +31,59 @@ export default function ContactUs() {
   return (
     <section className="mt-10 mb-10 px-4">
       <div className="container mx-auto">
-        <div className="grid lg:grid-cols-6 gap-12">
-          {/* Contact Form - Spans 3 columns */}
-          <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold mb-4">Get in touch</h2>
-            <p className="text-gray-600 mb-8">
-              Have a question or just want to say hi? We would love to hear from
-              you.
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Contact Info Cards */}
+          <div className="space-y-6 lg:col-span-1">
+            {/* Phone Card */}
+            <div className="bg-white p-6 rounded-lg shadow-md border">
+              <div className="flex items-start gap-4">
+                <Phone className="w-6 h-6 text-black mt-1" />
+                <div>
+                  <h3 className="font-bold text-lg mb-1">Phone</h3>
+                  <p className="text-gray-600 text-sm">
+                    Our customer care is open from Mon–Fri,
+                    <br />
+                    10:00 am to 7:00 pm
+                  </p>
+                  <p className="text-black mt-2 font-medium">
+                    +880 1861-650206
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Email Card */}
+            <div className="bg-white p-6 rounded-lg shadow-md border">
+              <div className="flex items-start gap-4">
+                <Mail className="w-6 h-6 text-black mt-1" />
+                <div>
+                  <h3 className="font-bold text-lg mb-1">Email</h3>
+                  <p className="text-gray-600 text-sm">
+                    Our support team will get back to you in 48h
+                    <br />
+                    during standard business hours.
+                  </p>
+                  <p className="text-black mt-2 font-medium">
+                    admin@bluebayit.com
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="lg:col-span-2">
+            <h4 className="uppercase text-sm font-bold text-purple-700 tracking-wide">
+              Get in touch
+            </h4>
+            <h2 className="text-3xl font-semibold mb-2">
+              <span className="italic font-bold text-purple-700">Connect</span>{" "}
+              with us
+            </h2>
+            <p className="text-sm text-gray-600 mb-6">
+              Please contact us using the details below. For more information
+              about our services, please visit the corresponding page on our
+              web.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -75,112 +120,27 @@ export default function ContactUs() {
               />
               <Button
                 type="submit"
-                className="bg-[#FF4B93] hover:bg-[#FF2D82] text-white px-8"
+                className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-md shadow-md transition duration-300"
               >
                 SEND YOUR MESSAGE
               </Button>
             </form>
           </div>
+        </div>
 
-          {/* Contact Information - Spans 2 columns */}
-          <div className="lg:col-span-2">
-            <div className="bg-white p-8 rounded-lg shadow-lg h-full flex flex-col justify-center">
-              <div className="space-y-8">
-                {/* Dhaka Office */}
-                <div className="flex gap-4">
-                  <MapPin className="w-5 h-5 text-[#FF4B93] flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-2">Dhaka Office:</h3>
-                    <p className="text-gray-600">
-                      250/B Road No. 06,
-                      <br />
-                      Smith Dhara, Japani Bazar,
-                      <br />
-                      Shonitakhra, Jatra Bari,
-                      <br />
-                      Dhaka-1236, Bangladesh.
-                    </p>
-                  </div>
-                </div>
-
-                {/* UK Office */}
-                <div className="flex gap-4">
-                  <MapPin className="w-5 h-5 text-[#FF4B93] flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-2">UK Office:</h3>
-                    <p className="text-gray-600">
-                      80-82 Nelson Street
-                      <br />
-                      London E1 2DY
-                      <br />
-                      United Kingdom
-                    </p>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="flex gap-4">
-                  <Mail className="w-5 h-5 text-[#FF4B93] flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-2">Email us directly</h3>
-                    <a
-                      href="mailto:sales@bluebayit.com"
-                      className="text-gray-600 hover:text-[#FF4B93] transition-colors"
-                    >
-                      sales@bluebayit.com
-                    </a>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex gap-4">
-                  <Phone className="w-5 h-5 text-[#FF4B93] flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-2">Phone</h3>
-                    <div className="space-y-1">
-                      <a
-                        href="tel:+8801861850206"
-                        className="block text-gray-600 hover:text-[#FF4B93] transition-colors"
-                      >
-                        +8801861850206
-                      </a>
-                      <a
-                        href="tel:+8801816255499"
-                        className="block text-gray-600 hover:text-[#FF4B93] transition-colors"
-                      >
-                        +8801816255499
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Social Media */}
-                <div>
-                  <h3 className="font-semibold mb-4">Follow Us</h3>
-                  <div className="flex gap-4">
-                    <a
-                      href="#"
-                      className="w-10 h-10 rounded-full bg-[#F4F5F8] flex items-center justify-center text-gray-600 hover:bg-[#FF4B93] hover:text-white transition-colors"
-                    >
-                      <Facebook className="w-5 h-5" />
-                    </a>
-                    <a
-                      href="#"
-                      className="w-10 h-10 rounded-full bg-[#F4F5F8] flex items-center justify-center text-gray-600 hover:bg-[#FF4B93] hover:text-white transition-colors"
-                    >
-                      <Twitter className="w-5 h-5" />
-                    </a>
-                    <a
-                      href="#"
-                      className="w-10 h-10 rounded-full bg-[#F4F5F8] flex items-center justify-center text-gray-600 hover:bg-[#FF4B93] hover:text-white transition-colors"
-                    >
-                      <Linkedin className="w-5 h-5" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Map Section (Full Width Below Form) */}
+        <div className="mt-10">
+          <iframe
+            title="Google Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228.346169539958!2d90.45283815014301!3d23.692448890276122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b744135cebcb%3A0x58b6f62a3a3160a8!2sBluebay%20IT%20Limited!5e0!3m2!1sen!2sbd!4v1747031483179!5m2!1sen!2sbd"
+            width="100%"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full"
+          ></iframe>
         </div>
       </div>
     </section>

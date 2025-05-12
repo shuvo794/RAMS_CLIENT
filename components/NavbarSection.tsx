@@ -113,10 +113,10 @@ export default function NavbarSection() {
               {[
                 { href: "/", label: "HOME" },
                 { href: "/About", label: "ABOUT" },
-                { href: "/portfolio", label: "BLOG" },
-                { href: "/Clients", label: "PRICING" },
+                { href: "/Blog", label: "BLOG" },
+                { href: "/", label: "PRICING" },
                 { href: "/contactus", label: "CONTACT US" },
-                { href: "/clients", label: "Clients" },
+                { href: "/Clients", label: "ClIENTS" },
               ].map(({ href, label }) => (
                 <NavigationMenuItem key={label}>
                   <Link href={href} passHref legacyBehavior>
