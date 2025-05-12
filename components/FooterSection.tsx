@@ -7,7 +7,7 @@ const companyLinks = [
   { title: "About", href: "/About" },
   { title: "Services", href: "/services" },
   { title: "Portfolio", href: "/portfolio" },
-  { title: "Contact Us", href: "/contactus" },
+  { title: "Contact Us", href: "/Contactus" },
 ];
 
 export default function FooterSection() {

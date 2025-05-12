@@ -53,7 +53,7 @@ export default async function BlogPage() {
         backgroundImage="/half-circle-bg.png" // Make sure this path and file exist
         breadcrumbs={[
           { label: "HOME", href: "/" },
-          { label: "BLOG", href: "/blog" },
+          { label: "BLOG", href: "/Blog" },
         ]}
       />
 

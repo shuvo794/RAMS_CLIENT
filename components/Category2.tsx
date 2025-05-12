@@ -66,10 +66,13 @@ Category2Props) {
     const fetchPortfolios = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(
-          `${GET_ALL_PORTFOLIOS}?page=${currentPage}&limit=${LIMIT}`
-        );
-        if (!response.ok) throw new Error("Failed to fetch portfolios");
+        const url = `${GET_ALL_PORTFOLIOS}?page=${currentPage}&limit=${LIMIT}`;
+        console.log("Fetching from:", url);
+
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Server error: ${response.status}`);
+        }
 
         const data = await response.json();
         if (data && data.portfolios) {
@@ -129,8 +132,8 @@ Category2Props) {
             {portfolios.length > 0 ? (
               portfolios.map((portfolio) => {
                 const portfolioUrl = portfolio.slug
-                  ? `/portfolio/${portfolio.slug}`
-                  : `/portfolio/${portfolio.id}`;
+                  ? `/Blog/${portfolio.slug}`
+                  : `/Blog/${portfolio.id}`;
                 return (
                   <Link
                     key={portfolio.id}
