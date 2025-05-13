@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import PageHeroSection from "@/components/PageHeroSection";
 import { GET_PORTFOLIOID } from "@/lib/config";
+import { Mail, Facebook, Twitter, Linkedin } from "lucide-react";
 
 interface Blog {
   id: number;
@@ -31,6 +32,29 @@ export default function BlogItemPage() {
     { name: "Business" },
     { name: "Design" },
   ]);
+
+  const recentPosts = [
+    {
+      title:
+        "20 Questions You Should Always Ask About Security Software Before Buying It.",
+      date: "July 27, 2020",
+      image: "/placeholder.png",
+      slug: "/post/security-questions",
+    },
+    {
+      title:
+        "Responsible for a Technology Budget? 12 Top Notch Ways to Spend Your Money.",
+      date: "July 27, 2025",
+      image: "/placeholder.png",
+      slug: "/post/tech-budget",
+    },
+    {
+      title: "Why You Should Focus on Improving Marketing.",
+      date: "July 27, 2026",
+      image: "/placeholder.png",
+      slug: "/post/improve-marketing",
+    },
+  ];
 
   const handleSearch = () => {
     console.log("Searching for:", searchTerm);
@@ -218,9 +242,10 @@ export default function BlogItemPage() {
 
               {/* Free Text */}
               <div className="bg-white p-4 rounded shadow mb-6">
-                <h3 className="text-lg font-bold border-b text-[#2f32c5] border-blue-500 inline-block pb-1 mb-4">
+                <h3 className="text-lg font-semibold text-indigo-700 mb-2">
                   Free Text
                 </h3>
+                <div className="h-1 w-10 bg-indigo-700 mb-4" />
                 <p className="text-gray-700 mb-2">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
                   vel odio vitae nisl venenatis ultricies.
@@ -229,9 +254,10 @@ export default function BlogItemPage() {
 
               {/* Categories */}
               <div className="bg-white p-4 rounded shadow mb-6">
-                <h3 className="text-lg font-bold border-b text-[#2f32c5] border-blue-500 inline-block pb-1 mb-4">
+                <h3 className="text-lg font-semibold text-indigo-700 mb-2">
                   Categories
                 </h3>
+                <div className="h-1 w-10 bg-indigo-700 mb-4" />
                 <ul className="divide-y divide-gray-100">
                   {categories.map((category, index) => (
                     <li key={index} className="py-2">
@@ -247,6 +273,93 @@ export default function BlogItemPage() {
                     </li>
                   ))}
                 </ul>
+              </div>
+              {/* Recent Posts  */}
+              <aside
+                style={{
+                  backgroundColor: "#f9f9f9",
+                  marginTop: "32px",
+                }}
+                aria-label="Sidebar Widgets"
+              >
+                <div className="bg-white p-4 rounded shadow mb-6">
+                  <h4 className="text-lg font-semibold text-indigo-700 mb-2">
+                    Recent Posts
+                  </h4>
+                  <div className="h-1 w-10 bg-indigo-700 mb-4" />
+                  <ul className="space-y-4">
+                    {recentPosts.map((post, index) => (
+                      <li key={index} className="flex gap-4">
+                        <img
+                          src="/test.jpg"
+                          alt={post.title}
+                          className="w-16 h-16 object-cover rounded"
+                        />
+                        <div>
+                          <a href={post.slug} className="text-sm font-medium">
+                            {post.title}
+                          </a>
+                          <p className="text-xs text-gray-500">{post.date}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </aside>
+              <div className="bg-white p-4 rounded shadow mb-6">
+                {/* Tag Cloud */}
+                <h4 className="text-lg font-semibold text-indigo-700 mb-2">
+                  Tag Cloud
+                </h4>
+                <div className="h-1 w-10 bg-indigo-700 mb-4" />
+
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "Technology",
+                    "Software",
+                    "Digital",
+                    "Social",
+                    "Security",
+                    "CRM",
+                    "Payment",
+                  ].map((tag) => (
+                    <span
+                      key={tag}
+                      className="border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-indigo-100 cursor-pointer transition"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded shadow">
+                {/* Follow Us */}
+                <h4 className="text-lg font-semibold text-indigo-700 mb-2">
+                  Follow Us
+                </h4>
+                <div className="h-1 w-10 bg-indigo-700 mb-4" />
+
+                {/* Social Media Icons */}
+                <div className="mt-4 sm:mt-0 flex  gap-4">
+                  {[
+                    { Icon: Facebook, link: "#" },
+                    { Icon: Twitter, link: "#" },
+                    { Icon: Linkedin, link: "#" },
+                    { Icon: Mail, link: "#" },
+                  ].map((social, index) => {
+                    const { Icon, link } = social;
+                    return (
+                      <a
+                        href={link}
+                        key={index}
+                        className="flex items-center justify-center w-10 h-10 rounded-full bg-[#262fbc]-800 "
+                      >
+                        <Icon className="w-5 h-5" />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

@@ -223,36 +223,13 @@ export default function OurServices() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              {/* <Card className="overflow-hidden border-none shadow-lg relative group transition-all duration-300 hover:bg-gradient-to-b hover:from-[#0066FF] hover:to-[#3d61d9] hover:text-white">
-                <CardContent className="flex flex-col justify-between items-center text-center p-6 h-full">
-                  <div className="mb-6 w-24 h-24 relative">
-                    {service.icon && (
-                      <FontAwesomeIcon
-                        icon={parseIconString(service.icon)}
-                        size="4x"
-                        className="text-[#0066FF] group-hover:text-white"
-                      />
-                    )}
-                  </div>
-
-                  <div dangerouslySetInnerHTML={{ __html: service.title }} />
-
-                  <div className="overflow-hidden h-24">
-                    <p
-                      className="text-gray-600 group-hover:text-white/90 line-clamp-3"
-                      dangerouslySetInnerHTML={{ __html: service.details }}
-                    />
-                  </div>
-                </CardContent>
-              </Card> */}
-
-              <Card className="relative overflow-hidden group">
+              <Card className="relative overflow-hidden group h-[380px] flex flex-col justify-between">
                 {/* Hover Background Overlay */}
                 <div className="absolute inset-0 bg-[#2530bd] translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-0" />
 
                 {/* Image Container */}
-                <div className="relative h-48 md:h-40 z-10">
-                  <div className="absolute inset-0 w-full h-full flex items-center justify-center p-2">
+                <div className="relative h-48 z-10 flex items-center justify-center">
+                  <div className="relative w-[100px] h-[100px]">
                     {/* Default Image */}
                     <Image
                       src={
@@ -263,7 +240,7 @@ export default function OurServices() {
                       alt="default icon"
                       width={100}
                       height={100}
-                      className="w-[100px] h-[100px] object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 absolute"
+                      className="object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 absolute inset-0"
                     />
 
                     {/* Hover Image */}
@@ -272,18 +249,22 @@ export default function OurServices() {
                       alt={service.title}
                       width={100}
                       height={100}
-                      className="w-[100px] h-[100px] object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 absolute transform group-hover:scale-110"
+                      className="object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 absolute inset-0 transform group-hover:scale-110"
                     />
                   </div>
                 </div>
 
                 {/* Card Content */}
-                <CardContent className="relative pt-6 pb-6 px-2 text-center z-10 transition duration-300 group-hover:text-white">
-                  <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-                  <p
-                    className="text-gray-600 leading-relaxed transition duration-300 group-hover:text-white"
-                    dangerouslySetInnerHTML={{ __html: service.details }}
-                  />
+                <CardContent className="relative px-4 pb-6 pt-4 text-center z-10 transition duration-300 group-hover:text-white flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 truncate">
+                      {service.title}
+                    </h3>
+                    <div
+                      className="text-gray-600 text-sm leading-relaxed transition duration-300 group-hover:text-white line-clamp-3"
+                      dangerouslySetInnerHTML={{ __html: service.details }}
+                    />
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
