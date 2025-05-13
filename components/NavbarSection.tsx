@@ -168,9 +168,12 @@ export default function NavbarSection() {
 
           <div className="flex items-center gap-4">
             {/* <ModeToggle /> */}
-            <Button className="bg-white text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-blue-500 transition-all duration-200 rounded-md px-6 py-2 text-sm font-medium">
-              Sign In
-            </Button>
+
+            <Link href="/Signin" passHref legacyBehavior>
+              <Button className="bg-white text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-blue-500 transition-all duration-200 rounded-md px-6 py-2 text-sm font-medium">
+                Sign In
+              </Button>
+            </Link>
             {/* Mobile Nav */}
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>

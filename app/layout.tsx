@@ -61,9 +61,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* <div className="hidden sm:block">
-            <AddressSection />
-          </div> */}
           <NavbarSection />
           {children}
           <FooterSection />
