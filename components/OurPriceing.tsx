@@ -17,7 +17,7 @@ export default function OurPriceing() {
     {
       name: "Premium",
       price: "$30",
-      color: "bg-blue-500",
+      color: "bg-blue-600",
       featured: true,
       features: [
         { name: "10 Pages/Screens", included: true },
@@ -53,16 +53,15 @@ export default function OurPriceing() {
           </p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3  p-6">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-lg overflow-hidden shadow-lg transform ${
-                plan.featured ? "md:-translate-y-4 scale-105" : ""
+              className={`rounded-lg overflow-hidden shadow-lg transform transition-all ${
+                plan.featured ? "md:-translate-y-4 scale-104" : ""
               }`}
             >
-              {/* Card Header with Wave */}
+              {/* Card Header */}
               <div className="relative">
                 <div
                   className={`${plan.color} pt-8 pb-16 px-4 text-center text-white`}
@@ -71,8 +70,6 @@ export default function OurPriceing() {
                   <div className="text-sm">Per Month</div>
                   <div className="text-2xl font-bold mt-1">{plan.name}</div>
                 </div>
-
-                {/* Wave SVG */}
                 <div className="absolute -bottom-1 left-0 w-full overflow-hidden">
                   <svg
                     className="fill-current text-white"
@@ -85,15 +82,18 @@ export default function OurPriceing() {
               </div>
 
               {/* Card Body */}
-              <div className="bg-white p-6">
+              <div
+                className={`bg-white p-4 flex flex-col justify-between ${
+                  plan.featured ? "min-h-[400px]" : "min-h-[400px]"
+                }`}
+              >
                 <p className="text-gray-600 text-sm mb-6">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Voluptates a vitae distinctio adipisicing elit. Voluptates a
-                  vitae distinctio.
+                  Voluptates a vitae distinctio.
                 </p>
 
                 {/* Features List */}
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-center">
                       {feature.included ? (
@@ -132,7 +132,7 @@ export default function OurPriceing() {
                   ))}
                 </ul>
 
-                {/* Call to Action Button */}
+                {/* CTA Button */}
                 <button
                   className={`w-full py-2 px-4 rounded uppercase font-medium text-white ${
                     plan.featured
