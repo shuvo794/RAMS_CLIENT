@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function OurPricing() {
   const plans = [
@@ -52,11 +53,17 @@ export default function OurPricing() {
           </p>
         </div>
 
+        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3  p-6">
-          {plans.map((plan) => (
-            <div
+          {plans.map((plan, index) => (
+            <motion.div
               key={plan.name}
-              className={`rounded-lg overflow-hidden shadow-lg transition-all ${
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.3 }}
+              className={`rounded-lg overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-transform ${
                 plan.featured ? "md:-translate-y-6 scale-105 z-10" : ""
               }`}
             >
@@ -74,7 +81,7 @@ export default function OurPricing() {
                   <div className="text-2xl font-bold mt-1">{plan.name}</div>
                   {plan.featured && (
                     <div className="absolute top-0 right-0 text-red-800 py-1 px-3 rounded-bl-lg font-bold text-xs">
-                      {/* Add label like "Popular" here if needed */}
+                      {/* Label like "Popular" can go here */}
                     </div>
                   )}
                 </div>
@@ -96,7 +103,7 @@ export default function OurPricing() {
                 }`}
               >
                 <p className="text-gray-600 text-sm mb-6">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Voluptates a vitae distinctio.
                 </p>
 
@@ -151,7 +158,7 @@ export default function OurPricing() {
                   {plan.featured ? "Get Premium Now" : "Purchase Now"}
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

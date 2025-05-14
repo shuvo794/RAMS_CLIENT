@@ -186,8 +186,8 @@ export default function NavbarSection() {
                   {[
                     { href: "/", label: "Home" },
                     { href: "/About", label: "About" },
-                    { href: "/portfolio", label: "Blog" },
-                    { href: "/Clients", label: "Pricing" },
+                    { href: "/Blog", label: "Blog" },
+                    { href: "/pricing", label: "Pricing" },
                     { href: "/contactus", label: "Contact Us" },
                   ].map(({ href, label }) => (
                     <Link

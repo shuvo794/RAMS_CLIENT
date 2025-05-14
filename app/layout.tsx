@@ -1,3 +1,4 @@
+// app/layout.tsx
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -16,16 +17,16 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
 
-  // Define routes where Navbar and Footer should not be displayed
   const hideNavbarAndFooter = pathname === "/Signin" || pathname === "/Signup";
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <head />
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           {!hideNavbarAndFooter && <NavbarSection />}

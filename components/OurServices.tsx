@@ -181,15 +181,15 @@ export default function OurServices() {
       <section className="mt-10 mb-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="h-6 bg-gray-300 rounded w-32 mx-auto mb-4"></div>
-            <div className="h-10 bg-gray-300 rounded w-64 mx-auto"></div>
+            <div className="h-6 bg-gray-300  w-32 mx-auto mb-4"></div>
+            <div className="h-10 bg-gray-300  w-64 mx-auto"></div>
             <div className="w-12 h-1 bg-gray-300 mx-auto mt-4"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((_, index) => (
               <div
                 key={index}
-                className="bg-gray-100 rounded-lg p-8 h-64 animate-pulse"
+                className="bg-gray-100  p-8 h-64 animate-pulse"
               ></div>
             ))}
           </div>
@@ -217,18 +217,17 @@ export default function OurServices() {
           {displayServices?.map((service, index) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 20, y: 20 }}
+              animate={{ opacity: 20, y: 20 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="relative overflow-hidden group h-[380px] flex flex-col justify-between">
+              <Card className="relative overflow-hidden group h-[380px] flex flex-col justify-between bg-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] rounded-none border border-gray-200">
                 {/* Hover Background Overlay */}
                 <div className="absolute inset-0 bg-[#2530bd] translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-0" />
 
                 {/* Image Container */}
                 <div className="relative h-48 z-10 flex items-center justify-center">
                   <div className="relative w-[100px] h-[100px]">
-                    {/* Default Image */}
                     <Image
                       src={
                         service.image?.startsWith("/media")
@@ -241,7 +240,6 @@ export default function OurServices() {
                       className="object-cover transition-opacity duration-300 opacity-100 group-hover:opacity-0 absolute inset-0"
                     />
 
-                    {/* Hover Image */}
                     <Image
                       src="/icon-5-light.svg"
                       alt={service.title}
