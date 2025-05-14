@@ -55,7 +55,7 @@ export default function OurPricing() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3  p-6">
-          {plans.map((plan, index) => (
+          {plans.map((plan) => (
             <motion.div
               key={plan.name}
               initial={{ opacity: 0, y: 40 }}
