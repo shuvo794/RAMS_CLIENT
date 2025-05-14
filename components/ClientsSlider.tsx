@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { BASE_URL, GET_CLIENTS, GET_CLIENTS_ALL } from "@/lib/config";
+import { BASE_URL, GET_CLIENTS_ALL } from "@/lib/config";
 import { Loader2 } from "lucide-react";
 
 interface Client {

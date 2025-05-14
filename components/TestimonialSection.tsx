@@ -1,10 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BASE_URL, GET_TESTIMONIALS } from "@/lib/config";
+import { GET_TESTIMONIALS } from "@/lib/config";
 import { Loader2 } from "lucide-react";
 
 interface Testimonial {

@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { BASE_URL } from "@/lib/config";
 

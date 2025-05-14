@@ -1,5 +1,5 @@
 "use client";
-import LoginPage from "@/components/Login";
+import CreatPage from "@/components/Signup";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
@@ -42,6 +42,7 @@ const page = () => {
                 height={64}
                 className="object-cover rounded"
               />
+
               <h1
                 style={{
                   fontSize: "2.5rem",
@@ -73,7 +74,7 @@ const page = () => {
 
         {/* Right Section */}
         <div className="flex flex-1 items-center justify-center p-12 border-t md:border-t-0 md:border-l border-gray-200">
-          <LoginPage />
+          <CreatPage />
         </div>
       </div>
     </div>

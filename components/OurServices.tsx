@@ -3,15 +3,14 @@
 import * as React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import useEmblaCarousel from "embla-carousel-react";
-import AutoplayPlugin from "embla-carousel-autoplay";
+// import useEmblaCarousel from "embla-carousel-react";
+// import AutoplayPlugin from "embla-carousel-autoplay";
 import { BASE_URL, GET_SERVICE_SLIDER } from "@/lib/config";
 import { useEffect, useState } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import type { IconProp, IconName } from "@fortawesome/fontawesome-svg-core";
 import Image from "next/image";
 
 // Add all icons to the library
@@ -28,10 +27,9 @@ interface ServiceSlider {
 }
 
 export default function OurServices() {
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align: "center" },
-    [AutoplayPlugin({ delay: 5000, stopOnInteraction: false })]
-  );
+  // const [emblaApi] = useEmblaCarousel({ loop: true, align: "center" }, [
+  //   AutoplayPlugin({ delay: 5000, stopOnInteraction: false }),
+  // ]);
 
   const [serviceSliders, setServiceSliders] = useState<ServiceSlider[]>([]);
   console.log("serviceSliders", serviceSliders);
@@ -65,17 +63,17 @@ export default function OurServices() {
     fetchServiceSliders();
   }, []);
 
-  React.useEffect(() => {
-    if (emblaApi) {
-      const onSelect = () => {
-        setActiveIndex(emblaApi.selectedScrollSnap());
-      };
-      emblaApi.on("select", onSelect);
-      return () => {
-        emblaApi.off("select", onSelect);
-      };
-    }
-  }, [emblaApi]);
+  // React.useEffect(() => {
+  //   if (emblaApi) {
+  //     const onSelect = () => {
+  //       setActiveIndex(emblaApi.selectedScrollSnap());
+  //     };
+  //     emblaApi.on("select", onSelect);
+  //     return () => {
+  //       emblaApi.off("select", onSelect);
+  //     };
+  //   }
+  // }, [emblaApi]);
 
   // const scrollTo = React.useCallback(
   //   (index: number) => emblaApi && emblaApi.scrollTo(index),
@@ -141,30 +139,30 @@ export default function OurServices() {
   //   },
   // ];
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  // const [setActiveIndex] = useState<number | null>(null);
 
-  const parseIconString = (iconString: string): IconProp => {
-    if (!iconString) return ["fas", "circle-info"];
+  // const parseIconString = (iconString: string): IconProp => {
+  //   if (!iconString) return ["fas", "circle-info"];
 
-    // Handle strings like "fa-solid fa-globe" or "fas fa-globe"
-    const parts = iconString.split(" ");
+  //   // Handle strings like "fa-solid fa-globe" or "fas fa-globe"
+  //   const parts = iconString.split(" ");
 
-    if (parts.length === 2) {
-      // Convert "fa-solid" or "fas" to "fas"
-      let prefix = parts[0].replace("fa-", "");
-      if (prefix === "solid") prefix = "fas";
-      if (prefix === "regular") prefix = "far";
-      if (prefix === "brands") prefix = "fab";
+  //   if (parts.length === 2) {
+  //     // Convert "fa-solid" or "fas" to "fas"
+  //     let prefix = parts[0].replace("fa-", "");
+  //     if (prefix === "solid") prefix = "fas";
+  //     if (prefix === "regular") prefix = "far";
+  //     if (prefix === "brands") prefix = "fab";
 
-      // Remove "fa-" prefix from icon name
-      const iconName = parts[1].replace("fa-", "");
+  //     // Remove "fa-" prefix from icon name
+  //     const iconName = parts[1].replace("fa-", "");
 
-      return [prefix as "fas" | "far" | "fab", iconName as IconName];
-    }
+  //     return [prefix as "fas" | "far" | "fab", iconName as IconName];
+  //   }
 
-    // Fallback for invalid format
-    return ["fas", "circle-info"];
-  };
+  //   // Fallback for invalid format
+  //   return ["fas", "circle-info"];
+  // };
 
   // Use API data if available, otherwise use fallback
   const displayServices = serviceSliders.length > 0 ? serviceSliders : [];

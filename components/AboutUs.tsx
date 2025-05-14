@@ -4,14 +4,7 @@ import type React from "react";
 
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  MessageCircle,
-  FileText,
-  Eye,
-  Briefcase,
-  Target,
-  Lightbulb,
-} from "lucide-react";
+
 import Image from "next/image";
 import { BASE_URL, GET_ABOUTS } from "@/lib/config";
 import { Loader2 } from "lucide-react";
@@ -80,11 +73,7 @@ interface AboutUsProps {
   backgroundImage?: string;
 }
 
-export default function AboutUs({
-  title = "ABOUT US",
-  description = "[#2530bd]bay IT Limited, one of Bangladesh's largest recruiting & travel conglomerates, has been a pioneer in providing a global platform to the Bangladesh recruiting & Travel industry by enabling access to state of the art recruiting & travel automation technology.",
-  backgroundImage = "/aboutus1.svg?height=1200&width=1920",
-}: AboutUsProps) {
+export default function AboutUs({}: AboutUsProps) {
   const [abouts, setAbouts] = useState<About[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

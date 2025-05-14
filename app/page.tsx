@@ -1,13 +1,10 @@
 import HeroSection from "@/components/HeroSection";
-import AboutUs from "@/components/AboutUs";
 
 import OurServices from "@/components/OurServices";
 import { Metadata } from "next";
-import ClientsSlider from "@/components/ClientsSlider";
 import TestimonialSection from "@/components/TestimonialSection";
 import OurToolkit from "@/components/OurToolkit";
 import OurPriceing from "@/components/OurPriceing";
-import { useState } from "react";
 
 export const metadata: Metadata = {
   title: "RAMS - Home",

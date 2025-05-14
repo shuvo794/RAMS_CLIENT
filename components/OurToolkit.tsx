@@ -1,58 +1,54 @@
 "use client";
-import { useState } from "react";
 
 export default function OurToolkit() {
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  // const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const toolkitItems = [
     {
-      title: "Performance Management",
-      description:
-        "Helps set performance goals, track progress, conduct performance reviews, and provide feedback.",
-      icon: "📊"
-    },
-    {
       title: "Employee Engagement",
-      description:
-        "Measures and improves employee engagement through surveys, feedback, and analytics.",
-      icon: "👥"
+      description: "Boosts morale through surveys and feedback",
+      icon: "👥",
     },
     {
-      title: "Onboarding Software",
-      description:
-        "Streamlines the onboarding process, including paperwork, training, and orientation.",
-      icon: "🚀"
+      title: "Agent Management",
+      description: "Tracks goals and reviews agent performance",
+      icon: "📊",
+    },
+
+    {
+      title: "Visa Entry",
+      description: "Simplifies onboarding with streamlined documentation",
+      icon: "🚀",
     },
     {
       title: "Payroll Software",
       description:
         "Automates payroll processes, including salary calculations, tax deductions, and direct deposits.",
-      icon: "💰"
+      icon: "💰",
     },
     {
-      title: "Employee Recognition",
-      description:
-        "Fosters a culture of appreciation by allowing employees to recognize and reward each other.",
-      icon: "🏆"
+      title: "Passenger Management",
+      description: "Organizes and monitors passenger-related processes",
+      icon: "🏆",
     },
     {
-      title: "Benefits Administration",
-      description:
-        "Manages employee benefits, such as health insurance, retirement plans, and other perks.",
-      icon: "🏥"
+      title: "Account Management",
+      description: "Oversees employee benefits and financial accounts",
+      icon: "🏥",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-700 to-indigo-900 text-white py-12">
+    <div className="min-h-screen bg-gradient-to-b from-blue-700 to-indigo-900 text-white py-12 ">
       {/* Header */}
-      <div className="container mx-auto px-4 text-center mb-16">
+      <div className="container mx-auto px-4 text-center mb-16 ">
         <h1 className="text-4xl font-bold mb-2">
           Our <span className="italic">Comprehensive</span> Toolkit
         </h1>
         <p className="max-w-2xl mx-auto">
-          Here innovation meets efficiency in our Comprehensive Toolkit for HR Management.
-          Designed to address the diverse needs of modern businesses.
+          Here innovation meets efficiency in our Comprehensive Toolkit for HR
+          Management. Designed to address the diverse needs of modern
+          businesses.
         </p>
       </div>
 

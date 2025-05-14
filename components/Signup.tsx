@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function LoginPage() {
+export default function CreatPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -32,7 +32,7 @@ export default function LoginPage() {
               textAlign: "center",
             }}
           >
-            Login
+            SIGN UP
           </h2>
         </div>
 
@@ -55,6 +55,22 @@ export default function LoginPage() {
 
       <form onSubmit={handleSubmit} style={{ width: "100%" }}>
         <div style={{ marginBottom: "1rem" }}>
+          <input
+            type="name"
+            placeholder="Enter Your Name"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "0.75rem",
+              borderRadius: "4px",
+              border: "1px solid #e2e8f0",
+              marginBottom: "1rem",
+              fontSize: "0.875rem",
+              transition: "border-color 0.2s ease",
+            }}
+            required
+          />
           <input
             type="email"
             placeholder="Enter Email/Username"
@@ -109,6 +125,7 @@ export default function LoginPage() {
             Forgot Password?
           </button>
         </div> */}
+
         <Link href="/Signin" passHref legacyBehavior>
           <button
             type="submit"

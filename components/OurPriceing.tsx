@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-export default function OurPriceing() {
+export default function OurPricing() {
   const plans = [
     {
       name: "Basic",
@@ -48,27 +48,35 @@ export default function OurPriceing() {
           <div className="w-16 h-1 bg-blue-500 mx-auto mb-6"></div>
           <p className="max-w-2xl mx-auto text-gray-600">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-            finibus mi id elit gravida, quis tincidunt purus fringilla. Aenean
-            convallis a neque non pellentesque.
+            finibus mi id elit gravida, quis tincidunt purus fringilla.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3  p-6">
+        <div className="grid grid-cols-1 md:grid-cols-3  p-6">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-lg overflow-hidden shadow-lg transform transition-all ${
-                plan.featured ? "md:-translate-y-4 scale-104" : ""
+              className={`rounded-lg overflow-hidden shadow-lg transition-all ${
+                plan.featured ? "md:-translate-y-6 scale-105 z-10" : ""
               }`}
             >
               {/* Card Header */}
               <div className="relative">
                 <div
-                  className={`${plan.color} pt-8 pb-16 px-4 text-center text-white`}
+                  className={`${
+                    plan.color
+                  } pt-8 pb-16 px-4 text-center text-white ${
+                    plan.featured ? "pt-12 pb-20" : ""
+                  }`}
                 >
                   <div className="text-lg font-medium">{plan.price}</div>
                   <div className="text-sm">Per Month</div>
                   <div className="text-2xl font-bold mt-1">{plan.name}</div>
+                  {plan.featured && (
+                    <div className="absolute top-0 right-0 text-red-800 py-1 px-3 rounded-bl-lg font-bold text-xs">
+                      {/* Add label like "Popular" here if needed */}
+                    </div>
+                  )}
                 </div>
                 <div className="absolute -bottom-1 left-0 w-full overflow-hidden">
                   <svg
@@ -83,8 +91,8 @@ export default function OurPriceing() {
 
               {/* Card Body */}
               <div
-                className={`bg-white p-4 flex flex-col justify-between ${
-                  plan.featured ? "min-h-[400px]" : "min-h-[400px]"
+                className={`bg-white p-6 flex flex-col justify-between h-[500px] ${
+                  plan.featured ? "pt-10" : ""
                 }`}
               >
                 <p className="text-gray-600 text-sm mb-6">
@@ -93,12 +101,12 @@ export default function OurPriceing() {
                 </p>
 
                 {/* Features List */}
-                <ul className="space-y-3 mb-">
+                <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-center">
                       {feature.included ? (
                         <svg
-                          className="w-5 h-5 text-green-500 mr-2"
+                          className="w-5 h-5 text-green-500 mr-3 flex-shrink-0"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -113,7 +121,7 @@ export default function OurPriceing() {
                         </svg>
                       ) : (
                         <svg
-                          className="w-5 h-5 text-red-500 mr-2"
+                          className="w-5 h-5 text-red-500 mr-3 flex-shrink-0"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -134,13 +142,13 @@ export default function OurPriceing() {
 
                 {/* CTA Button */}
                 <button
-                  className={`w-full py-2 px-4 rounded uppercase font-medium text-white ${
+                  className={`w-full py-3 px-4 rounded-lg uppercase font-bold text-white transition-colors ${
                     plan.featured
-                      ? "bg-blue-500 hover:bg-blue-600"
+                      ? "bg-blue-600 hover:bg-blue-700 text-lg"
                       : "bg-gray-700 hover:bg-gray-800"
                   }`}
                 >
-                  Purchase Now
+                  {plan.featured ? "Get Premium Now" : "Purchase Now"}
                 </button>
               </div>
             </div>

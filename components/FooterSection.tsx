@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Mail, Phone, Facebook, Twitter, Linkedin } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 
 const companyLinks = [
   { title: "HOME", href: "/" },

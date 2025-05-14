@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import PageHeroSection from "@/components/PageHeroSection";
 import { GET_PORTFOLIOID } from "@/lib/config";
 import { Mail, Facebook, Twitter, Linkedin } from "lucide-react";
+import Image from "next/image";
 
 interface Blog {
   id: number;
@@ -27,7 +28,7 @@ export default function BlogItemPage() {
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [categories, setCategories] = useState<Category[]>([
+  const [categories] = useState<Category[]>([
     { name: "Technology" },
     { name: "Business" },
     { name: "Design" },
@@ -290,7 +291,7 @@ export default function BlogItemPage() {
                   <ul className="space-y-4">
                     {recentPosts.map((post, index) => (
                       <li key={index} className="flex gap-4">
-                        <img
+                        <Image
                           src="/test.jpg"
                           alt={post.title}
                           className="w-16 h-16 object-cover rounded"
