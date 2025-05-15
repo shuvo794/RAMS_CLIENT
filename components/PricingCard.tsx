@@ -25,7 +25,6 @@ const PricingCard: React.FC<PricingCardProps> = ({
   features,
   disabledIndexes = [],
   btnColor = "bg-gray-800 text-white",
-  highlight = false,
   gradient = "from-blue-600 to-blue-600",
   hoverGradient = "from-blue-400 to-blue-700",
   hoveredTitle,
