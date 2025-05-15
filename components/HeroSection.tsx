@@ -462,7 +462,7 @@ export default function HeroSection() {
             padding: "2rem 0",
           }}
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-11">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-20">
             <div className="flex flex-col-reverse lg:flex-row items-center gap-10">
               {/* Left Text Content */}
               <div className="w-full lg:w-1/3">

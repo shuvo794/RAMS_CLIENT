@@ -110,7 +110,7 @@ export default function NavbarSection() {
             <NavigationMenuList className="flex gap-1">
               {[
                 { href: "/", label: "HOME" },
-                { href: "/About", label: "ABOUT" },
+
                 { href: "/Blog", label: "BLOG" },
                 { href: "/pricing", label: "PRICING" },
                 { href: "/contactus", label: "CONTACT US" },
@@ -185,7 +185,7 @@ export default function NavbarSection() {
                 <nav className="flex flex-col gap-4 mt-4">
                   {[
                     { href: "/", label: "Home" },
-                    { href: "/About", label: "About" },
+
                     { href: "/Blog", label: "Blog" },
                     { href: "/pricing", label: "Pricing" },
                     { href: "/contactus", label: "Contact Us" },
