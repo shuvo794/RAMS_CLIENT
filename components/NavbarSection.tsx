@@ -113,8 +113,8 @@ export default function NavbarSection() {
 
                 { href: "/Blog", label: "BLOG" },
                 { href: "/pricing", label: "PRICING" },
-                { href: "/contactus", label: "CONTACT US" },
                 { href: "/Clients", label: "ClIENTS" },
+                { href: "/contactus", label: "CONTACT US" },
               ].map(({ href, label }) => (
                 <NavigationMenuItem key={label}>
                   <Link href={href} passHref legacyBehavior>
@@ -188,6 +188,7 @@ export default function NavbarSection() {
 
                     { href: "/Blog", label: "Blog" },
                     { href: "/pricing", label: "Pricing" },
+                    { href: "/Clients", label: "ClIENTS" },
                     { href: "/contactus", label: "Contact Us" },
                   ].map(({ href, label }) => (
                     <Link
