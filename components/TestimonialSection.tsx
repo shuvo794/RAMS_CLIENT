@@ -125,7 +125,15 @@ export default function TestimonialSection() {
 
   if (isLoading) {
     return (
-      <section className="py-16 bg-gradient-to-br from-blue-500 to-blue-700 text-white">
+      <section
+        className="py-16 text-white"
+        style={{
+          backgroundImage: 'url("/bg-6.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-xl font-semibold mb-4 uppercase tracking-wider">
@@ -150,7 +158,15 @@ export default function TestimonialSection() {
   }
 
   return (
-    <section className="py-16 bg-gradient-to-br from-blue-500 to-blue-700 text-white overflow-hidden">
+    <section
+      className="py-16 mb-24  text-white overflow-hidden"
+      style={{
+        backgroundImage: 'url("/bg-6.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-xl font-semibold mb-4 uppercase tracking-wider">

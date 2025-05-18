@@ -40,7 +40,7 @@ export default function FooterSection() {
   }, []);
   return (
     <footer
-      className="bg-[#2530bd] text-white"
+      className="text-white   px-4 "
       style={{
         background:
           "linear-gradient(45deg, #488fed 0%, #291fbc 51%, #0f0786 100%)",

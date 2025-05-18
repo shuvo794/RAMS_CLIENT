@@ -102,7 +102,7 @@ export default function ContactUs() {
             <h4 className="uppercase text-sm font-bold text-purple-700 tracking-wide">
               Get in touch
             </h4>
-            <h2 className="text-3xl font-semibold mb-2">
+            <h2 className="text-3xl font-semibold mb-6 mt-2">
               <span className="italic font-bold text-purple-700">Connect</span>{" "}
               with us
             </h2>
@@ -113,13 +113,13 @@ export default function ContactUs() {
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-6 mb-6  ">
                 <Input
                   placeholder="Your Name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="bg-gray-50"
+                  className="bg-gray-50 p-5 rounded-md shadow-md border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                 />
                 <Input
                   placeholder="Your Email"
@@ -127,7 +127,7 @@ export default function ContactUs() {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="bg-gray-50"
+                  className="bg-gray-50 p-5  rounded-md shadow-md border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                 />
               </div>
               <Input
@@ -135,14 +135,14 @@ export default function ContactUs() {
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                className="bg-gray-50"
+                className="bg-gray-50 p-5  rounded-md shadow-md border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
               />
               <Textarea
                 placeholder="Write Your Message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                className="min-h-[200px] bg-gray-50"
+                className="min-h-[200px] p-5  bg-gray-50 rounded-md shadow-md border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
               />
               <Button
                 type="submit"
