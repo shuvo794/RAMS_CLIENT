@@ -4,10 +4,10 @@ import { MapPin, Mail, Phone } from "lucide-react";
 
 const companyLinks = [
   { title: "HOME", href: "/" },
-  { title: "About", href: "/About" },
+
   { title: "Blog", href: "/Blog" },
   { title: "PRICING", href: "/pricing" },
-  { title: "CONTACT US", href: "/Contactus" },
+  { title: "CONTACT US", href: "/contactus" },
 ];
 
 export default function FooterSection() {
@@ -139,7 +139,7 @@ export default function FooterSection() {
                 <Mail className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div className="text-gray-300">
                   <div>admin@bluebayit.com</div>
-                  <div>support@gmail.com</div>
+                  {/* <div>support@gmail.com</div> */}
                 </div>
               </li>
               <li className="flex items-start space-x-3">
