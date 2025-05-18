@@ -1,10 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone } from "lucide-react";
+import { GET_SITESETTINGS } from "@/lib/config";
+
+type GeneralSettings = {
+  address: string;
+  email: string;
+  email2: string;
+  phone: number;
+  phone2: number;
+  address2: string;
+};
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -13,6 +23,8 @@ export default function ContactUs() {
     subject: "",
     message: "",
   });
+
+  const [data, setData] = useState<GeneralSettings | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +39,20 @@ export default function ContactUs() {
       [e.target.name]: e.target.value,
     }));
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(GET_SITESETTINGS);
+        const json = await res.json();
+        setData(json.general_settings[0]); // assuming array
+      } catch (error) {
+        console.error("API fetch error:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <section className="mt-10 mb-10 px-4">
@@ -46,7 +72,7 @@ export default function ContactUs() {
                     10:00 am to 7:00 pm
                   </p>
                   <p className="text-black mt-2 font-medium">
-                    +880 1861-650206
+                    {data?.phone || ""}
                   </p>
                 </div>
               </div>
@@ -64,7 +90,7 @@ export default function ContactUs() {
                     during standard business hours.
                   </p>
                   <p className="text-black mt-2 font-medium">
-                    admin@bluebayit.com
+                    {data?.email || ""}
                   </p>
                 </div>
               </div>

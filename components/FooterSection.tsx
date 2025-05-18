@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Mail, Phone } from "lucide-react";
+import { useEffect, useState } from "react";
+import { GET_SITESETTINGS } from "@/lib/config";
 
 const companyLinks = [
   { title: "HOME", href: "/" },
@@ -10,7 +12,32 @@ const companyLinks = [
   { title: "CONTACT US", href: "/contactus" },
 ];
 
+type GeneralSettings = {
+  address: string;
+  email: string;
+  email2: string;
+  email3: string;
+  phone: number;
+  phone2: number;
+  phone3: number;
+  address2: string;
+};
+
 export default function FooterSection() {
+  const [data, setData] = useState<GeneralSettings | null>(null);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(GET_SITESETTINGS);
+        const json = await res.json();
+        setData(json.general_settings[0]); // assuming array
+      } catch (error) {
+        console.error("API fetch error:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
   return (
     <footer className="bg-[#2530bd] text-white">
       <div className="container mx-auto px-4 py-16">
@@ -50,15 +77,15 @@ export default function FooterSection() {
               })}
             </div> */}
             {/* Download App Section */}
-            <div className="text-white mt-10 rounded-lg">
-              <h3 className="text-xl font-bold mb-4 sm:mb-0">
+            <div className="text-white mt-5 mb-5 rounded-lg">
+              <h3 className="text-xl font-bold mb-5 sm:mb-0">
                 Download the App
               </h3>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+              <div className="flex flex-col mt-3 sm:flex-row items-start sm:items-center justify-between">
                 <div className="flex flex-wrap gap-3">
                   <a
                     href="#"
-                    className="flex items-center bg-white text-blue-800 px-4 py-2 rounded-lg"
+                    className="flex items-center bg-white text-blue-800 px-4 py-4 rounded-lg"
                   >
                     <span className="mr-2">
                       <svg
@@ -124,28 +151,24 @@ export default function FooterSection() {
           </div>
 
           {/* BD Contact Info */}
-
           <div>
             <h3 className="text-xl font-bold mb-6">Dhaka Office</h3>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
-                <span className="text-gray-300">
-                  250/6Road No: 06, Smriti Dhara, Japani Bazar,Shonirakhra,
-                  Jatra Bari,Dhaka-1236, Bangladesh.
-                </span>
+                <span className="text-gray-300">{data?.address || ""}</span>
               </li>
               <li className="flex items-start space-x-3">
                 <Mail className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div className="text-gray-300">
-                  <div>admin@bluebayit.com</div>
+                  <div>{data?.email || ""}</div>
                   {/* <div>support@gmail.com</div> */}
                 </div>
               </li>
               <li className="flex items-start space-x-3">
                 <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
                 <div className="text-gray-300">
-                  <div>+8801861650206</div>
+                  <div>{data?.phone || ""}</div>
                 </div>
               </li>
             </ul>
