@@ -103,7 +103,7 @@ export default function NavbarSection() {
       >
         <div className="max-w-[1200px] mx-auto flex justify-between items-center p-4">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/RAMSLo11go.png" alt="Logo" width={100} height={100} />
+            <Image src="/RAMSNew(2).png" alt="Logo" width={150} height={80} />
           </Link>
 
           <NavigationMenu className="hidden lg:flex">
