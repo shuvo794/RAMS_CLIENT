@@ -30,7 +30,7 @@ export default function FooterSection() {
       try {
         const res = await fetch(GET_SITESETTINGS);
         const json = await res.json();
-        setData(json.general_settings[0]); // assuming array
+        setData(json.general_settings[0]);
       } catch (error) {
         console.error("API fetch error:", error);
       }
