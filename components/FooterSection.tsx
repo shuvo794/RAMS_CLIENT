@@ -62,26 +62,7 @@ export default function FooterSection() {
               Happen active county. Winding for the morning am shyness evident
               to poor. Garrets because elderly new.
             </p>
-            {/* Social Media Icons */}
-            {/* <div className="mt-4 sm:mt-0 flex  gap-4">
-              {[
-                { Icon: Facebook, link: "#" },
-                { Icon: Twitter, link: "#" },
-                { Icon: Linkedin, link: "#" },
-                { Icon: Mail, link: "#" },
-              ].map((social, index) => {
-                const { Icon, link } = social;
-                return (
-                  <a
-                    href={link}
-                    key={index}
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-[#262fbc]-800 hover:bg-[#262fbc]-700 transition-all transform hover:scale-110 text-[#262fbc]-400 hover:text-white"
-                  >
-                    <Icon className="w-5 h-5" />
-                  </a>
-                );
-              })}
-            </div> */}
+
             {/* Download App Section */}
             <div className="text-white mt-5 mb-5 rounded-lg">
               <h3 className="text-xl font-bold mb-5 sm:mb-0">
