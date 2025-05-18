@@ -55,7 +55,7 @@ export default function FooterSection() {
                 src="/RAMSNew.png"
                 alt="RAMS Logo"
                 width={144}
-                height={114}
+                height={144}
               />
             </Link>
             <p className="text-gray-300 mb-6">
