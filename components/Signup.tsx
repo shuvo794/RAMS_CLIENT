@@ -35,22 +35,6 @@ export default function CreatPage() {
             SIGN UP
           </h2>
         </div>
-
-        {/* <button
-          style={{
-            backgroundColor: "blue",
-            padding: "0.5rem 1rem",
-            borderRadius: "4px",
-            textAlign: "center",
-
-            border: "none",
-            color: "#fff",
-            fontSize: "0.875rem",
-            cursor: "pointer",
-          }}
-        >
-          Register
-        </button> */}
       </div>
 
       <form onSubmit={handleSubmit} style={{ width: "100%" }}>
@@ -105,26 +89,26 @@ export default function CreatPage() {
           />
         </div>
 
-        {/* <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginBottom: "1.5rem",
-          }}
-        >
+        <Link href="/Signup" passHref legacyBehavior>
           <button
-            type="button"
+            type="submit"
             style={{
-              backgroundColor: "transparent",
+              width: "100%",
+              padding: "0.75rem",
+              backgroundColor: "#4361ee",
+              color: "white",
               border: "none",
-              color: "#4361ee",
-              fontSize: "0.75rem",
+              borderRadius: "4px",
+              fontSize: "0.875rem",
+              fontWeight: "500",
               cursor: "pointer",
+              marginBottom: "1rem",
+              transition: "background-color 0.2s ease",
             }}
           >
-            Forgot Password?
+            SIGN UP
           </button>
-        </div> */}
+        </Link>
 
         <Link href="/Signin" passHref legacyBehavior>
           <button
@@ -144,26 +128,6 @@ export default function CreatPage() {
             }}
           >
             SIGN IN
-          </button>
-        </Link>
-        <Link href="/Signup" passHref legacyBehavior>
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              padding: "0.75rem",
-              backgroundColor: "#4361ee",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              fontSize: "0.875rem",
-              fontWeight: "500",
-              cursor: "pointer",
-              marginBottom: "1rem",
-              transition: "background-color 0.2s ease",
-            }}
-          >
-            SIGN UP
           </button>
         </Link>
       </form>

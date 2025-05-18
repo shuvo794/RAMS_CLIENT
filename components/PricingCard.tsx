@@ -10,7 +10,6 @@ interface PricingCardProps {
   features: string[];
   disabledIndexes?: number[];
   btnColor?: string;
-  highlight?: boolean;
   gradient?: string;
   hoverGradient?: string;
   hoveredTitle?: string | null;
@@ -31,6 +30,8 @@ const PricingCard: React.FC<PricingCardProps> = ({
   setHoveredTitle,
 }) => {
   const isPremium = title.toLowerCase() === "premium";
+  const isBasic = title.toLowerCase() === "basic";
+  const isStandard = title.toLowerCase() === "standard";
   const isHoveredByAnother = hoveredTitle && hoveredTitle !== title;
 
   const [isHovered, setIsHovered] = useState(false);
@@ -42,6 +43,23 @@ const PricingCard: React.FC<PricingCardProps> = ({
       ? hoverGradient
       : gradient;
 
+  // 🎯 FINAL SCALE LOGIC
+  let scale = 1;
+
+  if (hoveredTitle?.toLowerCase() === "basic") {
+    if (isPremium) scale = 1.05;
+    else if (isBasic) scale = 1.1;
+    else scale = 1;
+  } else if (hoveredTitle?.toLowerCase() === "standard") {
+    if (isPremium) scale = 1.05;
+    else if (isStandard) scale = 1.1;
+    else scale = 1;
+  } else if (hoveredTitle?.toLowerCase() === "premium") {
+    if (isPremium) scale = 1.05;
+  } else {
+    scale = isPremium ? 1.05 : 1;
+  }
+
   return (
     <motion.div
       onMouseEnter={() => {
@@ -52,15 +70,13 @@ const PricingCard: React.FC<PricingCardProps> = ({
         setIsHovered(false);
         setHoveredTitle?.(null);
       }}
-      animate={{
-        scale: isPremium ? 1.05 : isHovered ? 1.05 : 1,
-      }}
+      animate={{ scale }}
       transition={{ duration: 0.3 }}
       className={`relative w-full max-w-sm rounded-2xl overflow-hidden shadow-xl transition-transform ${
         isHovered ? "z-10" : "z-0"
       }`}
     >
-      {/* Gradient Header */}
+      {/* Header */}
       <div
         className={`relative bg-gradient-to-b ${appliedGradient} p-16 text-white text-center transition-colors duration-300`}
       >
@@ -69,7 +85,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
         <h3 className="text-2xl font-bold">{title}</h3>
       </div>
 
-      {/* Card Body */}
+      {/* Body */}
       <div className="bg-white p-6 text-center flex flex-col justify-between min-h-[550px]">
         <p className="text-sm text-gray-600 mb-6">{description}</p>
         <ul className="mb-6 text-left space-y-3">

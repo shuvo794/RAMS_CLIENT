@@ -14,10 +14,23 @@ const page = () => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center w-full min-h-screen  p-8 md:p-16"
-      style={{ backgroundImage: 'url("/bg-6.jpg")' }}
+      className="flex flex-col items-center justify-center w-full min-h-screen p-8 md:p-16 relative"
+      style={{
+        backgroundImage: 'url("/bg-6.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
-      <div className="flex flex-col md:flex-row w-full  max-w-6xl rounded-2xl shadow-2xl overflow-hidden bg-white">
+      {/* Back Button */}
+      <button
+        onClick={() => window.history.back()}
+        className="absolute top-4 left-4 text-white bg-black/50 hover:bg-black/70 px-4 py-2 rounded"
+      >
+        ← Back
+      </button>
+
+      <div className="flex flex-col md:flex-row w-full max-w-6xl rounded-2xl shadow-2xl overflow-hidden bg-white">
         {/* Left Section */}
         <Card
           className="flex flex-col flex-1 items-center justify-center border-0 rounded-none p-12"
@@ -26,15 +39,8 @@ const page = () => {
               "linear-gradient(45deg, #488fed 0%, #291fbc 51%, #0f0786 100%)",
           }}
         >
-          {" "}
           <CardContent className="flex flex-col items-center justify-center w-full max-w-md">
-            <div
-              style={{
-                color: "white",
-
-                animation: "fadeIn 1s ease-in-out",
-              }}
-            >
+            <div style={{ color: "white", animation: "fadeIn 1s ease-in-out" }}>
               <Image
                 src="/bbit.png"
                 alt="Logo"
@@ -53,7 +59,6 @@ const page = () => {
               >
                 Welcome to <span style={{ fontWeight: "300" }}>Rams</span>
               </h1>
-
               <p
                 style={{
                   fontSize: "1.125rem",

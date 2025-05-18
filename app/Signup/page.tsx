@@ -15,8 +15,20 @@ const page = () => {
   return (
     <div
       className="flex flex-col items-center justify-center w-full min-h-screen  p-8 md:p-16"
-      style={{ backgroundImage: 'url("/bg-6.jpg")' }}
+      style={{
+        backgroundImage: 'url("/bg-6.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
+      {/* Back Button */}
+      <button
+        onClick={() => window.history.back()}
+        className="absolute top-4 left-4 text-white bg-black/50 hover:bg-black/70 px-4 py-2 rounded"
+      >
+        ← Back
+      </button>
       <div className="flex flex-col md:flex-row w-full  max-w-6xl rounded-2xl shadow-2xl overflow-hidden bg-white">
         {/* Left Section */}
         <Card
