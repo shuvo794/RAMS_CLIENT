@@ -23,8 +23,8 @@ export default function OurPricing() {
       description: "Most popular choice",
       features: ["10 Pages", "Responsive Design", "Reports", "Upload"],
       btnColor: "bg-blue-600 text-white",
-      gradient: "from-blue-400 to-blue-700", // default
-      hoverGradient: "from-blue-400 to-blue-700", // stays same
+      gradient: "from-blue-400 to-blue-700",
+      hoverGradient: "from-blue-400 to-blue-700",
     },
     {
       title: "Standard",
@@ -48,7 +48,7 @@ export default function OurPricing() {
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
         {plans.map((plan) => (
           <PricingCard
             key={plan.title}
