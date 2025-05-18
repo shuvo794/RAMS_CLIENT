@@ -39,17 +39,23 @@ export default function FooterSection() {
     fetchData();
   }, []);
   return (
-    <footer className="bg-[#2530bd] text-white">
+    <footer
+      className="bg-[#2530bd] text-white"
+      style={{
+        background:
+          "linear-gradient(45deg, #488fed 0%, #291fbc 51%, #0f0786 100%)",
+      }}
+    >
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
               <Image
-                src="/bbit.png"
-                alt="BlueBayIT Logo"
-                width={100}
-                height={50}
+                src="/RAMSNew.png"
+                alt="RAMS Logo"
+                width={144}
+                height={114}
               />
             </Link>
             <p className="text-gray-300 mb-6">
@@ -177,7 +183,7 @@ export default function FooterSection() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="bg-[#262fbc] text-gray-400 py-4">
+      <div className=" text-gray-400 py-4">
         <div className="container mx-auto flex items-center justify-center px-4">
           <p className="text-sm text-center">
             © 2025{" "}

@@ -53,7 +53,7 @@ const page = () => {
               }}
             >
               <Image
-                src="/RAMS New Logo White  (1).png"
+                src="/RAMSNew.png"
                 alt="Logo"
                 width={214}
                 height={114}
