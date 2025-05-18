@@ -40,24 +40,35 @@ const page = () => {
           }}
         >
           <CardContent className="flex flex-col items-center justify-center w-full max-w-md">
-            <div style={{ color: "white", animation: "fadeIn 1s ease-in-out" }}>
+            <div
+              style={{
+                color: "white",
+                animation: "fadeIn 1s ease-in-out",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center", // centers items horizontally
+                justifyContent: "center",
+                textAlign: "center", // centers text
+                padding: "2rem",
+              }}
+            >
               <Image
-                src="/bbit.png"
+                src="/Log5o (3).png"
                 alt="Logo"
-                width={64}
-                height={64}
+                width={214}
+                height={114}
                 className="object-cover rounded"
               />
               <h1
                 style={{
-                  fontSize: "2.5rem",
+                  fontSize: "2.4rem",
                   fontWeight: "600",
                   marginTop: "1.5rem",
                   marginBottom: "1rem",
                   lineHeight: "1.2",
                 }}
               >
-                Welcome to <span style={{ fontWeight: "300" }}>Rams</span>
+                Welcome to <span style={{ fontWeight: "400" }}>Rams</span>
               </h1>
               <p
                 style={{
@@ -79,6 +90,20 @@ const page = () => {
         {/* Right Section */}
         <div className="flex flex-1 items-center justify-center p-12 border-t md:border-t-0 md:border-l border-gray-200">
           <LoginPage />
+        </div>
+      </div>
+      {/* Footer */}
+
+      {/* Bottom Bar */}
+      <div className=" text-gray-400 py-4">
+        <div className="container mx-auto flex items-center justify-center px-4">
+          <p className="text-sm text-center">
+            © 2025{" "}
+            <span className="text-white font-semibold">
+              RAMS(Bluebay IT Limited)
+            </span>
+            . All Rights Reserved.
+          </p>
         </div>
       </div>
     </div>
