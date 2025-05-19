@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { GET_HOMEPAGE_SLIDER } from "@/lib/config";
+import { BASE_URL, GET_BANNER } from "@/lib/config";
 
 // Update the interface to handle multiple sliders
 interface HomepageSlider {
@@ -10,7 +10,7 @@ interface HomepageSlider {
   title: string;
   subtitle: string;
   image: string;
-  details: string;
+  description: string;
 }
 
 // Define slide style variations
@@ -79,25 +79,20 @@ interface HomepageSlider {
 
 export default function HeroSection() {
   const [sliderData, setSliderData] = useState<HomepageSlider[]>([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
   // const [setIsLoading] = useState(true);
   // const [setError] = useState<string | null>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const fetchSliderData = async () => {
       try {
-        const response = await fetch(GET_HOMEPAGE_SLIDER);
+        const response = await fetch(GET_BANNER);
         if (!response.ok) {
           throw new Error("Failed to fetch slider data");
         }
         const data = await response.json();
-        setSliderData(data.homepage_sliders);
+        setSliderData(data?.banners);
       } catch (err) {
-        console.error("Error fetching slider data:", err);
-        // setError("Failed to load content");
       } finally {
-        // setIsLoading(false);
       }
     };
 
@@ -110,16 +105,16 @@ export default function HeroSection() {
   // };
 
   // Navigation functions with transition effect
-  const nextSlide = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentSlide((prev) =>
-        prev === sliderData.length - 1 ? 0 : prev + 1
-      );
-      setIsTransitioning(false);
-    }, 300);
-  }, [isTransitioning, sliderData.length]);
+  // const nextSlide = useCallback(() => {
+  //   if (isTransitioning) return;
+  //   setIsTransitioning(true);
+  //   setTimeout(() => {
+  //     setCurrentSlide((prev) =>
+  //       prev === sliderData.length - 1 ? 0 : prev + 1
+  //     );
+  //     setIsTransitioning(false);
+  //   }, 300);
+  // }, [isTransitioning, sliderData.length]);
 
   // const prevSlide = () => {
   //   if (isTransitioning) return;
@@ -133,14 +128,14 @@ export default function HeroSection() {
   // };
 
   // Auto slide change
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isTransitioning) {
-        nextSlide();
-      }
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [currentSlide, sliderData, isTransitioning, nextSlide]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (!isTransitioning) {
+  //       nextSlide();
+  //     }
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, [currentSlide, sliderData, isTransitioning, nextSlide]);
 
   // Get current slide style
   // const currentStyle = slideStyles[currentSlide % slideStyles.length];
@@ -468,24 +463,22 @@ export default function HeroSection() {
               <div className="w-full lg:w-1/3">
                 <div className="mb-2">
                   <h1 className="text-3xl sm:text-2xl md:text-4xl font-bold leading-tight text-white">
-                    Efficient Rams Solutions for{" "}
-                    <span className="text-white">Modern Workforces</span>
+                    {sliderData[0]?.title}
                   </h1>
                 </div>
-                <p className="text-base leading-relaxed text-white">
-                  In today fast-paced business environment, efficiency is key.
-                  Our HR solutions are crafted to streamline your processes,
-                  from recruitment to retirement. Experience a seamless workflow
-                  that enhances productivity, reduces administrative overhead,
-                  and empowers your team to focus on what matters
-                </p>
+                <p
+                  className="text-base leading-relaxed text-white"
+                  dangerouslySetInnerHTML={{
+                    __html: sliderData[0]?.description || "",
+                  }}
+                ></p>
               </div>
 
               {/* Right Image */}
               <div className="w-full lg:w-2/3">
                 <div className="relative w-full h-[70vh] sm:h-[80vh] lg:h-[90vh]">
                   <Image
-                    src="/hero-hr.png"
+                    src={`${BASE_URL}${sliderData[0]?.image ?? ""}`}
                     alt="HR Illustration"
                     fill
                     className="object-contain"

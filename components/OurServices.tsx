@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 // import useEmblaCarousel from "embla-carousel-react";
 // import AutoplayPlugin from "embla-carousel-autoplay";
-import { BASE_URL, GET_SERVICE_SLIDER } from "@/lib/config";
+import { BASE_URL, GET_MODULES, GET_SERVICE_SLIDER } from "@/lib/config";
 import { useEffect, useState } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -20,17 +20,14 @@ interface ServiceSlider {
   id: number;
   title: string;
   subtitle?: string;
-  image: string;
-  details: string;
+  default_image: string;
+  hover_image: string;
+  description: string;
   serial_number: number;
   slug?: string;
 }
 
 export default function OurServices() {
-  // const [emblaApi] = useEmblaCarousel({ loop: true, align: "center" }, [
-  //   AutoplayPlugin({ delay: 5000, stopOnInteraction: false }),
-  // ]);
-
   const [serviceSliders, setServiceSliders] = useState<ServiceSlider[]>([]);
   console.log("serviceSliders", serviceSliders);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,14 +37,14 @@ export default function OurServices() {
   useEffect(() => {
     const fetchServiceSliders = async () => {
       try {
-        const response = await fetch(GET_SERVICE_SLIDER);
+        const response = await fetch(GET_MODULES);
         if (!response.ok) {
           throw new Error("Failed to fetch service sliders");
         }
         const data = await response.json();
-        if (data && data.service_sliders) {
+        if (data && data?.modules) {
           // Sort by serial_number
-          const sortedSliders = [...data.service_sliders].sort(
+          const sortedSliders = [...data?.modules].sort(
             (a, b) => a.serial_number - b.serial_number
           );
           setServiceSliders(sortedSliders);
@@ -86,7 +83,7 @@ export default function OurServices() {
   //     id: 1,
   //     serial_number: 1,
   //     title: "Software Development",
-  //     details:
+  //     description:
   //       "Expert software development services tailored to your business needs.",
   //     image: "/placeholder.svg?height=100&width=100",
   //     slug: "Software-Development",
@@ -96,7 +93,7 @@ export default function OurServices() {
   //     id: 2,
   //     serial_number: 2,
   //     title: "Web Application",
-  //     details: "Custom web applications built with modern technologies.",
+  //     description: "Custom web applications built with modern technologies.",
   //     image: "/placeholder.svg?height=100&width=100",
   //     slug: "Web-Application",
   //     icon: "fa-solid fa-globe",
@@ -105,7 +102,7 @@ export default function OurServices() {
   //     id: 3,
   //     serial_number: 3,
   //     title: "Domain & Hosting",
-  //     details: "Reliable domain and hosting solutions for your business.",
+  //     description: "Reliable domain and hosting solutions for your business.",
   //     image: "/placeholder.svg?height=100&width=100",
   //     slug: "Domain-Hosting",
   //     icon: "fa-solid fa-globe",
@@ -114,7 +111,7 @@ export default function OurServices() {
   //     id: 4,
   //     serial_number: 4,
   //     title: "Digital Marketing",
-  //     details: "Strategic digital marketing to grow your online presence.",
+  //     description: "Strategic digital marketing to grow your online presence.",
   //     image: "/placeholder.svg?height=100&width=100",
   //     slug: "Digital-Marketing",
   //     icon: "fa-solid fa-globe",
@@ -123,7 +120,7 @@ export default function OurServices() {
   //     id: 5,
   //     serial_number: 5,
   //     title: "Dedicated Server Hosting",
-  //     details: "We provide 100% Dell Branded PowerEdge C1100 Servers",
+  //     description: "We provide 100% Dell Branded PowerEdge C1100 Servers",
   //     image: "/placeholder.svg?height=100&width=100",
   //     slug: "/dedicated-server-hosting",
   //     icon: "fa-solid fa-globe",
@@ -132,7 +129,7 @@ export default function OurServices() {
   //     id: 6,
   //     serial_number: 6,
   //     title: "IT Training",
-  //     details: "Professional IT training programs for individuals and teams.",
+  //     description: "Professional IT training programs for individuals and teams.",
   //     image: "/placeholder.svg?height=100&width=100",
   //     slug: "IT-Training",
   //     icon: "fa-solid fa-globe",
@@ -230,9 +227,9 @@ export default function OurServices() {
                   <div className="relative w-[100px] h-[100px]">
                     <Image
                       src={
-                        service.image?.startsWith("/media")
-                          ? `${BASE_URL}${service.image}`
-                          : service.image
+                        service.default_image?.startsWith("/media")
+                          ? `${BASE_URL}${service.default_image}`
+                          : service.default_image
                       }
                       alt="default icon"
                       width={100}
@@ -241,7 +238,11 @@ export default function OurServices() {
                     />
 
                     <Image
-                      src="/icon-5-light.svg"
+                      src={
+                        service.hover_image?.startsWith("/media")
+                          ? `${BASE_URL}${service.hover_image}`
+                          : service.hover_image
+                      }
                       alt={service.title}
                       width={100}
                       height={100}
@@ -258,7 +259,7 @@ export default function OurServices() {
                     </h3>
                     <div
                       className="text-gray-600 text-sm leading-relaxed transition duration-300 group-hover:text-white line-clamp-3"
-                      dangerouslySetInnerHTML={{ __html: service.details }}
+                      dangerouslySetInnerHTML={{ __html: service.description }}
                     />
                   </div>
                 </CardContent>
