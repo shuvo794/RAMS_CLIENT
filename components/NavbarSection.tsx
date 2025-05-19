@@ -18,7 +18,6 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { GET_SERVICE_SLIDER } from "@/lib/config";
 
 interface Service {
   id: number;
@@ -61,26 +60,6 @@ export default function NavbarSection() {
     }
     return ["fas", "circle-info"];
   };
-
-  useEffect(() => {
-    const fetchServiceSliders = async () => {
-      try {
-        const response = await fetch(GET_SERVICE_SLIDER);
-        if (!response.ok) throw new Error("Failed to fetch service sliders");
-        const data = await response.json();
-        if (data?.service_sliders) {
-          const sorted = [...data.service_sliders].sort(
-            (a, b) => a.serial_number - b.serial_number
-          );
-          setServiceSliders(sorted);
-        }
-      } catch (err) {
-        console.error("Error fetching service sliders:", err);
-        setError("Failed to load services");
-      }
-    };
-    fetchServiceSliders();
-  }, []);
 
   return (
     <>
