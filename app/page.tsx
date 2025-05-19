@@ -34,10 +34,6 @@ export default async function Home() {
       <OurServices />
       <OurToolkit />
       <OurPriceing />
-      {/* <AboutUs /> */}
-      {/* <OurPortfolio /> */}
-      {/* <ClientsSlider />
-       */}
       <TestimonialSection />
     </main>
   );
