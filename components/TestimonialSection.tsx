@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react";
 
 interface Testimonial {
   id: number;
-  review: string;
+  massage: string;
   name: string;
   designation: string;
   serial_number: number;
@@ -201,7 +201,7 @@ export default function TestimonialSection() {
                   <div className="mb-4 flex-grow text-center">
                     <p
                       className="italic text-gray-600 dark:text-gray-300 text-sm md:text-sm"
-                      dangerouslySetInnerHTML={{ __html: testimonial.review }}
+                      dangerouslySetInnerHTML={{ __html: testimonial.massage }}
                     ></p>
                   </div>
 
