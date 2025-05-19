@@ -20,3 +20,4 @@ export const GET_CLIENTS_DETAILS = `${BASE_URL}/client/api/v1/client/without_pag
 export const GET_ABOUTS = `${BASE_URL}/about/api/v1/about/all/`;
 export const GET_SITESETTINGS = `${BASE_URL}/general_setting/api/v1/general_setting/all/`;
 export const GET_MODULES = `${BASE_URL}/module/api/v1/module/all/`;
+export const GET_SOLUTIONS = `${BASE_URL}/solution/api/v1/solution/all/`;
