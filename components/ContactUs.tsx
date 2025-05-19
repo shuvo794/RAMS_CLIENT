@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone } from "lucide-react";
-import { GET_SITESETTINGS } from "@/lib/config";
+import { CRETE_CONTUCTUS, GET_SITESETTINGS } from "@/lib/config";
 
 type GeneralSettings = {
   address: string;
@@ -28,7 +28,33 @@ export default function ContactUs() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+
+    try {
+      const response = await fetch(CRETE_CONTUCTUS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      // Reset the form
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+
+      alert("Message sent successfully!");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to send message. Please try again.");
+    }
   };
 
   const handleChange = (
