@@ -31,10 +31,9 @@ interface Service {
 }
 
 export default function NavbarSection() {
-  const [serviceSliders, setServiceSliders] = useState<Service[]>([]);
+  const [serviceSliders] = useState<Service[]>([]);
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {

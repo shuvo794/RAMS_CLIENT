@@ -20,10 +20,6 @@ interface Blog {
   created_at: string;
 }
 
-interface Category {
-  name: string;
-}
-
 interface Blogs {
   id: number;
   title: string;
@@ -38,15 +34,9 @@ export default function BlogItemPage() {
   const { id } = useParams();
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
   const [blogs, setBlogs] = useState<Blogs[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
   const [, setError] = useState<string | null>(null);
-  const [categories] = useState<Category[]>([
-    { name: "Technology" },
-    { name: "Business" },
-    { name: "Design" },
-  ]);
 
   useEffect(() => {
     if (!id) return;

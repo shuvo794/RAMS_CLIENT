@@ -13,7 +13,7 @@ interface toolItem {
 export default function OurToolkit() {
   const [toolkitItems, setToolkitItems] = useState<toolItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [, setError] = useState<string | null>(null);
 
   const icons = <SendHorizontal />;
 

@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 // import useEmblaCarousel from "embla-carousel-react";
 // import AutoplayPlugin from "embla-carousel-autoplay";
-import { BASE_URL, GET_MODULES, GET_SERVICE_SLIDER } from "@/lib/config";
+import { BASE_URL, GET_MODULES } from "@/lib/config";
 import { useEffect, useState } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";

@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GET_TESTIMONIALS } from "@/lib/config";
-import { Loader2 } from "lucide-react";
 
 interface Testimonial {
   id: number;
