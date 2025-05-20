@@ -25,6 +25,8 @@ type GeneralSettings = {
 
 export default function FooterSection() {
   const [data, setData] = useState<GeneralSettings | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -33,6 +35,8 @@ export default function FooterSection() {
         setData(json.general_settings[0]);
       } catch (error) {
         console.error("API fetch error:", error);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -141,23 +145,28 @@ export default function FooterSection() {
           <div>
             <h3 className="text-xl font-bold mb-6">Dhaka Office</h3>
             <ul className="space-y-4">
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
-                <span className="text-gray-300">{data?.address || ""}</span>
-              </li>
-              <li className="flex items-start space-x-3">
-                <Mail className="w-5 h-5 mt-1 flex-shrink-0" />
-                <div className="text-gray-300">
-                  <div>{data?.email || ""}</div>
-                  {/* <div>support@gmail.com</div> */}
-                </div>
-              </li>
-              <li className="flex items-start space-x-3">
-                <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
-                <div className="text-gray-300">
-                  <div>{data?.phone || ""}</div>
-                </div>
-              </li>
+              {isLoading ? (
+                <>
+                  <li className="h-5 bg-gray-400/30 rounded w-3/4 animate-pulse" />
+                  <li className="h-5 bg-gray-400/30 rounded w-2/3 animate-pulse" />
+                  <li className="h-5 bg-gray-400/30 rounded w-1/2 animate-pulse" />
+                </>
+              ) : (
+                <>
+                  <li className="flex items-start space-x-3">
+                    <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">{data?.address || ""}</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <Mail className="w-5 h-5 mt-1 flex-shrink-0" />
+                    <div className="text-gray-300">{data?.email || ""}</div>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
+                    <div className="text-gray-300">{data?.phone || ""}</div>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

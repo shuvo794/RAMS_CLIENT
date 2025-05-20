@@ -26,26 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Fetch categories for server component
-// async function getCategories() {
-//   try {
-//     const response = await fetch(GET_PORTFOLIO_CATEGORIES, {
-//       next: { revalidate: 3600 },
-//     });
-//     if (!response.ok) {
-//       throw new Error("Failed to fetch categories");
-//     }
-//     const data = await response.json();
-//     return data.blog_categories || [];
-//   } catch (error) {
-//     console.error("Error fetching categories:", error);
-//     return [];
-//   }
-// }
-
 export default async function BlogPage() {
-  // const categories = await getCategories();
-
   return (
     <>
       <PageHeroSection

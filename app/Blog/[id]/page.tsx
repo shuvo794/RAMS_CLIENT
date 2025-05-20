@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import PageHeroSection from "@/components/PageHeroSection";
-import { GET_PORTFOLIOID } from "@/lib/config";
+import { BASE_URL, GET_BLOG, GET_BLOGS } from "@/lib/config";
 import { Mail, Facebook, Twitter, Linkedin } from "lucide-react";
 import Image from "next/image";
 
@@ -17,10 +17,21 @@ interface Blog {
   technology: string;
   site_link: string;
   tags?: string[];
+  created_at: string;
 }
 
 interface Category {
   name: string;
+}
+
+interface Blogs {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  created_at: string;
+  slug?: string;
 }
 
 export default function BlogItemPage() {
@@ -28,45 +39,21 @@ export default function BlogItemPage() {
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [blogs, setBlogs] = useState<Blogs[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [, setError] = useState<string | null>(null);
   const [categories] = useState<Category[]>([
     { name: "Technology" },
     { name: "Business" },
     { name: "Design" },
   ]);
 
-  const recentPosts = [
-    {
-      title:
-        "20 Questions You Should Always Ask About Security Software Before Buying It.",
-      date: "July 27, 2020",
-      image: "/placeholder.png",
-      slug: "/post/security-questions",
-    },
-    {
-      title:
-        "Responsible for a Technology Budget? 12 Top Notch Ways to Spend Your Money.",
-      date: "July 27, 2025",
-      image: "/placeholder.png",
-      slug: "/post/tech-budget",
-    },
-    {
-      title: "Why You Should Focus on Improving Marketing.",
-      date: "July 27, 2026",
-      image: "/placeholder.png",
-      slug: "/post/improve-marketing",
-    },
-  ];
-
-  const handleSearch = () => {
-    console.log("Searching for:", searchTerm);
-  };
-
   useEffect(() => {
     if (!id) return;
 
     const fetchBlog = async () => {
       try {
-        const response = await fetch(`${GET_PORTFOLIOID}${id}`);
+        const response = await fetch(`${GET_BLOG}${id}`);
         if (!response.ok) throw new Error("Failed to fetch blog");
         const data = await response.json();
         setBlog(data || null);
@@ -81,7 +68,83 @@ export default function BlogItemPage() {
     fetchBlog();
   }, [id]);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  useEffect(() => {
+    const fetchServiceSliders = async () => {
+      try {
+        const response = await fetch(GET_BLOGS);
+        if (!response.ok) throw new Error("Failed to fetch service sliders");
+        const data = await response.json();
+        if (data?.blogs) {
+          const sortedSliders = [...data.blogs].sort(
+            (a, b) => a.serial_number - b.serial_number
+          );
+          setBlogs(sortedSliders);
+        }
+      } catch (err) {
+        console.error("Error fetching service sliders:", err);
+        setError("Failed to load services");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchServiceSliders();
+  }, []);
+
+  if (loading)
+    return (
+      <div className="bg-gray-50 py-10 animate-pulse">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="w-full md:w-2/3">
+              <div className="text-white mb-6 rounded overflow-hidden bg-gray-200 h-64"></div>
+              <div className="mb-4">
+                <div className="h-4 bg-gray-200 rounded w-32"></div>
+              </div>
+              <div className="mb-6">
+                <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+              </div>
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+            </div>
+            <div className="w-full md:w-1/3">
+              <aside aria-label="Sidebar Widgets">
+                <div className="bg-white p-4 rounded shadow mb-6">
+                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+                  <div className="h-1 w-10 bg-gray-200 rounded mb-4"></div>
+                  <ul className="space-y-4">
+                    {[...Array(2)].map((_, i) => (
+                      <li key={i} className="flex gap-4">
+                        <div className="h-16 w-16 bg-gray-200 rounded mr-2"></div>
+                        <div>
+                          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                          <div className="h-4 bg-gray-200 rounded w-1/2 mt-2"></div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </aside>
+              <div className="bg-white p-4 rounded shadow">
+                <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+                <div className="h-1 w-10 bg-gray-200 rounded mb-4"></div>
+                <div className="mt-4 sm:mt-0 flex gap-4">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="w-10 h-10 rounded-full bg-gray-200"
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
   if (!blog) return <p className="text-center mt-10">Project not found.</p>;
 
   return (
@@ -99,96 +162,40 @@ export default function BlogItemPage() {
       <div className="bg-gray-50 py-10">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-8">
-            {/* Main Content */}
             <div className="w-full md:w-2/3">
-              <div className="bg-blue-500 text-white mb-6 rounded overflow-hidden">
-                <div className="relative aspect-video flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="border-2 border-white p-4 inline-block">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-8 w-8"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+              <div
+                className="text-white mb-6 rounded overflow-hidden"
+                style={{
+                  backgroundImage: `url(${BASE_URL}${blog.image ?? ""})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "left",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <div className="relative aspect-video flex items-center justify-center"></div>
                 <div className="p-4 text-sm flex justify-between items-center">
-                  <div className="flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 mr-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <span>AUGUST 7, 2023</span>
-                  </div>
-                  <div className="flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 mr-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                      />
-                    </svg>
-                    <span>1 COMMENT</span>
-                  </div>
+                  <span className="text-blue-800 font-bold">
+                    {new Date(blog.created_at).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
                 </div>
               </div>
 
               <div className="mb-4">
                 <span className="bg-blue-100 text-blue-600 px-2 py-1 text-xs uppercase tracking-wide font-semibold rounded">
-                  Category Name
+                  {blog.industry || "Category"}
                 </span>
               </div>
 
               <div className="mb-6">
                 <h2 className="text-2xl font-bold mb-4">{blog.title}</h2>
-                <p className="text-gray-700 mb-4">{blog.description}</p>
-              </div>
-
-              <div className="mb-6">
-                <h3 className="text-xl font-bold mb-3">
-                  Mauris quis scelerisque sapien
-                </h3>
-                <p className="text-gray-700 mb-4">{blog.description}</p>
-                <ul className="list-none space-y-3 mb-6">
-                  {[
-                    "Quisque lacinia purus...",
-                    "Sed ullamcorper augue...",
-                    "Fusce hendrerit leo...",
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="text-blue-600 mr-2 mt-1">■</div>
-                      <div className="text-gray-700">{item}</div>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-gray-700 mb-4">{blog.description}</p>
+                <p
+                  className="text-gray-700 mb-4"
+                  dangerouslySetInnerHTML={{ __html: blog.description }}
+                />
               </div>
 
               {blog.tags && blog.tags.length > 0 && (
@@ -207,159 +214,84 @@ export default function BlogItemPage() {
               )}
             </div>
 
-            {/* Sidebar */}
             <div className="w-full md:w-1/3">
-              {/* Search */}
-              <div className="bg-white p-4 rounded shadow mb-6">
-                <div className="flex">
-                  <input
-                    type="text"
-                    className="flex-grow px-4 py-2 border border-gray-300 rounded-l focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                  <button
-                    onClick={handleSearch}
-                    className="bg-gray-200 px-4 py-2 rounded-r border border-gray-300 border-l-0"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-gray-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              {/* Free Text */}
-              <div className="bg-white p-4 rounded shadow mb-6">
-                <h3 className="text-lg font-semibold text-indigo-700 mb-2">
-                  Free Text
-                </h3>
-                <div className="h-1 w-10 bg-indigo-700 mb-4" />
-                <p className="text-gray-700 mb-2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                  vel odio vitae nisl venenatis ultricies.
-                </p>
-              </div>
-
-              {/* Categories */}
-              <div className="bg-white p-4 rounded shadow mb-6">
-                <h3 className="text-lg font-semibold text-indigo-700 mb-2">
-                  Categories
-                </h3>
-                <div className="h-1 w-10 bg-indigo-700 mb-4" />
-                <ul className="divide-y divide-gray-100">
-                  {categories.map((category, index) => (
-                    <li key={index} className="py-2">
-                      <a
-                        href="#"
-                        className="flex items-center justify-between text-gray-700 hover:text-blue-600"
-                      >
-                        <span>{category.name}</span>
-                        <span className="text-[#3752d3] font-bold text-sm">
-                          &gt;
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {/* Recent Posts  */}
               <aside
-                style={{
-                  backgroundColor: "#f9f9f9",
-                  marginTop: "32px",
-                }}
+                className="bg-gray-100 p-4 rounded shadow mb-6"
                 aria-label="Sidebar Widgets"
               >
-                <div className="bg-white p-4 rounded shadow mb-6">
-                  <h4 className="text-lg font-semibold text-indigo-700 mb-2">
-                    Recent Posts
-                  </h4>
-                  <div className="h-1 w-10 bg-indigo-700 mb-4" />
-                  <ul className="space-y-4">
-                    {recentPosts.map((post, index) => (
+                <h4 className="text-lg font-semibold text-indigo-700 mb-2">
+                  Recent Posts
+                </h4>
+                <div className="h-1 w-10 bg-indigo-700 mb-4" />
+                <ul className="space-y-4">
+                  {blogs.map((post, index) => {
+                    const blogUrl = post.slug
+                      ? `/Blog/${post.slug}`
+                      : `/Blog/${post.id}`;
+                    return (
                       <li key={index} className="flex gap-4">
                         <Image
-                          src="/test.jpg"
+                          src={
+                            post.image?.startsWith("/media")
+                              ? `${BASE_URL}${post.image}`
+                              : "/test.jpg"
+                          }
                           alt={post.title}
+                          width={64}
+                          height={64}
                           className="w-16 h-16 object-cover rounded"
                         />
                         <div>
-                          <a href={post.slug} className="text-sm font-medium">
+                          <a href={blogUrl} className="text-sm font-medium">
                             {post.title}
                           </a>
-                          <p className="text-xs text-gray-500">{post.date}</p>
+                          <p className="text-xs text-gray-500 font-bold">
+                            {new Date(post.created_at).toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                              }
+                            )}
+                          </p>
                         </div>
                       </li>
-                    ))}
-                  </ul>
-                </div>
+                    );
+                  })}
+                </ul>
               </aside>
-              <div className="bg-white p-4 rounded shadow mb-6">
-                {/* Tag Cloud */}
-                <h4 className="text-lg font-semibold text-indigo-700 mb-2">
-                  Tag Cloud
-                </h4>
-                <div className="h-1 w-10 bg-indigo-700 mb-4" />
-
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "Technology",
-                    "Software",
-                    "Digital",
-                    "Social",
-                    "Security",
-                    "CRM",
-                    "Payment",
-                  ].map((tag) => (
-                    <span
-                      key={tag}
-                      className="border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-indigo-100 cursor-pointer transition"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
 
               <div className="bg-white p-4 rounded shadow">
-                {/* Follow Us */}
                 <h4 className="text-lg font-semibold text-indigo-700 mb-2">
                   Follow Us
                 </h4>
                 <div className="h-1 w-10 bg-indigo-700 mb-4" />
-
-                {/* Social Media Icons */}
-                <div className="mt-4 sm:mt-0 flex  gap-4">
-                  {[
-                    { Icon: Facebook, link: "#" },
-                    { Icon: Twitter, link: "#" },
-                    { Icon: Linkedin, link: "#" },
-                    { Icon: Mail, link: "#" },
-                  ].map((social, index) => {
-                    const { Icon, link } = social;
-                    return (
-                      <a
-                        href={link}
-                        key={index}
-                        className="flex items-center justify-center w-10 h-10 rounded-full bg-[#262fbc]-800 "
-                      >
-                        <Icon className="w-5 h-5" />
-                      </a>
-                    );
-                  })}
+                <div className="mt-4 flex gap-4">
+                  <a
+                    href="#"
+                    className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center"
+                  >
+                    <Facebook size={18} />
+                  </a>
+                  <a
+                    href="#"
+                    className="w-10 h-10 bg-sky-400 text-white rounded-full flex items-center justify-center"
+                  >
+                    <Twitter size={18} />
+                  </a>
+                  <a
+                    href="#"
+                    className="w-10 h-10 bg-blue-800 text-white rounded-full flex items-center justify-center"
+                  >
+                    <Linkedin size={18} />
+                  </a>
+                  <a
+                    href="#"
+                    className="w-10 h-10 bg-gray-600 text-white rounded-full flex items-center justify-center"
+                  >
+                    <Mail size={18} />
+                  </a>
                 </div>
               </div>
             </div>
