@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react";
 
 interface Testimonial {
   id: number;
-  massage: string;
+  review: string;
   name: string;
   designation: string;
   serial_number: number;
@@ -126,7 +126,7 @@ export default function TestimonialSection() {
   if (isLoading) {
     return (
       <section
-        className="py-16 text-white"
+        className="py-16 mb-24 text-white"
         style={{
           backgroundImage: 'url("/bg-6.jpg")',
           backgroundSize: "cover",
@@ -135,22 +135,15 @@ export default function TestimonialSection() {
         }}
       >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-xl font-semibold mb-4 uppercase tracking-wider">
-              Testimonials
-            </h2>
-            <h3 className="text-4xl font-bold relative inline-block pb-4">
-              Happy Clients <span className="font-normal">Feedback</span>
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-white" />
-            </h3>
-            <p className="mt-4 max-w-2xl mx-auto text-blue-100">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              finibus mi et elit gravida, quis tincidunt purus fringilla. Aenean
-              convallis a neque non pellentesque.
-            </p>
+          <div className="text-center mb-12 animate-pulse">
+            <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+            <div className="h-6 bg-gray-200 rounded w-1/3 mx-auto mt-2"></div>
+            <div className="h-3 bg-gray-200 rounded w-3/4 mx-auto mt-4"></div>
           </div>
-          <div className="flex justify-center items-center h-64">
-            <Loader2 className="w-12 h-12 animate-spin text-white" />
+          <div className="grid grid-cols-1   md:grid-cols-3 gap-6 animate-pulse">
+            <div className="bg-gray-200 dark:bg-gray-800 rounded-lg p-12 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-64 relative"></div>
+            <div className="bg-gray-200 dark:bg-gray-800 rounded-lg p-12 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-64 relative"></div>
+            <div className="bg-gray-200 dark:bg-gray-800 rounded-lg p-12 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-64 relative"></div>
           </div>
         </div>
       </section>
@@ -195,13 +188,13 @@ export default function TestimonialSection() {
             >
               {getCurrentPageItems().map((testimonial, index) => (
                 <div
-                  className="bg-white dark:bg-gray-800 rounded-lg p-12 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-full relative"
+                  className="bg-white dark:bg-gray-800 rounded-lg p-12 shadow-lg text-gray-800 dark:text-gray-200 flex flex-col h-[100%] relative"
                   key={index}
                 >
                   <div className="mb-4 flex-grow text-center">
                     <p
                       className="italic text-gray-600 dark:text-gray-300 text-sm md:text-sm"
-                      dangerouslySetInnerHTML={{ __html: testimonial.massage }}
+                      dangerouslySetInnerHTML={{ __html: testimonial.review }}
                     ></p>
                   </div>
 

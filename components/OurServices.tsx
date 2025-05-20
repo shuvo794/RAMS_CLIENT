@@ -60,118 +60,8 @@ export default function OurServices() {
     fetchServiceSliders();
   }, []);
 
-  // React.useEffect(() => {
-  //   if (emblaApi) {
-  //     const onSelect = () => {
-  //       setActiveIndex(emblaApi.selectedScrollSnap());
-  //     };
-  //     emblaApi.on("select", onSelect);
-  //     return () => {
-  //       emblaApi.off("select", onSelect);
-  //     };
-  //   }
-  // }, [emblaApi]);
-
-  // const scrollTo = React.useCallback(
-  //   (index: number) => emblaApi && emblaApi.scrollTo(index),
-  //   [emblaApi]
-  // );
-
-  // Fallback services data if API fails
-  // const fallbackServices = [
-  //   {
-  //     id: 1,
-  //     serial_number: 1,
-  //     title: "Software Development",
-  //     description:
-  //       "Expert software development services tailored to your business needs.",
-  //     image: "/placeholder.svg?height=100&width=100",
-  //     slug: "Software-Development",
-  //     icon: "fa-solid fa-globe",
-  //   },
-  //   {
-  //     id: 2,
-  //     serial_number: 2,
-  //     title: "Web Application",
-  //     description: "Custom web applications built with modern technologies.",
-  //     image: "/placeholder.svg?height=100&width=100",
-  //     slug: "Web-Application",
-  //     icon: "fa-solid fa-globe",
-  //   },
-  //   {
-  //     id: 3,
-  //     serial_number: 3,
-  //     title: "Domain & Hosting",
-  //     description: "Reliable domain and hosting solutions for your business.",
-  //     image: "/placeholder.svg?height=100&width=100",
-  //     slug: "Domain-Hosting",
-  //     icon: "fa-solid fa-globe",
-  //   },
-  //   {
-  //     id: 4,
-  //     serial_number: 4,
-  //     title: "Digital Marketing",
-  //     description: "Strategic digital marketing to grow your online presence.",
-  //     image: "/placeholder.svg?height=100&width=100",
-  //     slug: "Digital-Marketing",
-  //     icon: "fa-solid fa-globe",
-  //   },
-  //   {
-  //     id: 5,
-  //     serial_number: 5,
-  //     title: "Dedicated Server Hosting",
-  //     description: "We provide 100% Dell Branded PowerEdge C1100 Servers",
-  //     image: "/placeholder.svg?height=100&width=100",
-  //     slug: "/dedicated-server-hosting",
-  //     icon: "fa-solid fa-globe",
-  //   },
-  //   {
-  //     id: 6,
-  //     serial_number: 6,
-  //     title: "IT Training",
-  //     description: "Professional IT training programs for individuals and teams.",
-  //     image: "/placeholder.svg?height=100&width=100",
-  //     slug: "IT-Training",
-  //     icon: "fa-solid fa-globe",
-  //   },
-  // ];
-
-  // const [setActiveIndex] = useState<number | null>(null);
-
-  // const parseIconString = (iconString: string): IconProp => {
-  //   if (!iconString) return ["fas", "circle-info"];
-
-  //   // Handle strings like "fa-solid fa-globe" or "fas fa-globe"
-  //   const parts = iconString.split(" ");
-
-  //   if (parts.length === 2) {
-  //     // Convert "fa-solid" or "fas" to "fas"
-  //     let prefix = parts[0].replace("fa-", "");
-  //     if (prefix === "solid") prefix = "fas";
-  //     if (prefix === "regular") prefix = "far";
-  //     if (prefix === "brands") prefix = "fab";
-
-  //     // Remove "fa-" prefix from icon name
-  //     const iconName = parts[1].replace("fa-", "");
-
-  //     return [prefix as "fas" | "far" | "fab", iconName as IconName];
-  //   }
-
-  //   // Fallback for invalid format
-  //   return ["fas", "circle-info"];
-  // };
-
   // Use API data if available, otherwise use fallback
   const displayServices = serviceSliders.length > 0 ? serviceSliders : [];
-
-  // Generate href based on title if slug is not available
-  // const getServiceHref = (service: ServiceSlider) => {
-  //   if (service.slug) {
-  //     return `/services/${service.slug}`;
-  //   }
-  //   // Convert title to slug format
-  //   return `/services/${service.slug}`;
-  // };
 
   if (isLoading) {
     return (
@@ -180,7 +70,7 @@ export default function OurServices() {
           <div className="text-center mb-16">
             <div className="h-6 bg-gray-300  w-32 mx-auto mb-4"></div>
             <div className="h-10 bg-gray-300  w-64 mx-auto"></div>
-            <div className="w-12 h-1 bg-gray-300 mx-auto mt-4"></div>
+            <div className="w-[50%] h-1 bg-gray-300 mx-auto mt-4"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((_, index) => (
