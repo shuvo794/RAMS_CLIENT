@@ -2,15 +2,16 @@
 import LoginPage from "@/components/Login";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+// import { useRouter } from "next/router";
 
 const page = () => {
   // const router = useRouter();
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   // In a real application, you would handle authentication here
-  //   //   router.push('/dashboard');
-  // };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // In a real application, you would handle authentication here
+    // router.push("/");
+  };
 
   return (
     <div

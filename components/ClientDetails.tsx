@@ -30,32 +30,6 @@ export default function ClientsDetails() {
   const [totalCount, setTotalCount] = useState(0);
 
   const totalPages = Math.ceil(totalCount / blogsPerPage);
-  // useEffect(() => {
-  //   const fetchClients = async () => {
-  //     try {
-  //       const response = await fetch(GET_PATNERS);
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch clients");
-  //       }
-  //       const data = await response.json();
-  //       console.log("jdfhsadkjhas", data);
-  //       if (data && data.partners) {
-  //         // Sort by serial_number
-  //         const sortedClients = [...data.partners].sort(
-  //           (a, b) => a.serial_number - b.serial_number
-  //         );
-  //         setClients(sortedClients);
-  //         setTotalCount(data.total_pages || 0);
-  //       }
-  //     } catch (err) {
-  //       console.error("Error fetching clients:", err);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   fetchClients();
-  // }, []);
 
   const fetchBlogs = async (page: number, size: number) => {
     setIsLoading(true);

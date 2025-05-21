@@ -34,6 +34,7 @@ export default function NavbarSection() {
   const [serviceSliders] = useState<Service[]>([]);
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +45,17 @@ export default function NavbarSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // console.log("isScrolledvcv", isScrolled);
+  useEffect(() => {
+    const userName = localStorage.getItem("userName");
+    if (userName) {
+      try {
+        setUser(JSON?.parse(userName));
+      } catch (error) {
+        console.error("Error parsing user from localStorage", error);
+        setUser(userName);
+      }
+    }
+  }, []);
 
   const parseIconString = (iconString: string): IconProp => {
     if (!iconString) return ["fas", "circle-info"];
@@ -58,6 +69,12 @@ export default function NavbarSection() {
       return [prefix as "fas" | "far" | "fab", iconName as IconName];
     }
     return ["fas", "circle-info"];
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("userName");
+    localStorage.removeItem("token");
+    setUser(null);
   };
 
   return (
@@ -88,7 +105,6 @@ export default function NavbarSection() {
             <NavigationMenuList className="flex gap-1">
               {[
                 { href: "/", label: "HOME" },
-
                 { href: "/Blog", label: "BLOG" },
                 { href: "/pricing", label: "PRICING" },
                 { href: "/Clients", label: "ClIENTS" },
@@ -104,9 +120,6 @@ export default function NavbarSection() {
               ))}
 
               <NavigationMenuItem>
-                {/* <NavigationMenuTrigger className="inline-flex h-10 items-center justify-center rounded-md px-4 text-sm font-medium hover:bg-gray-100">
-                  Client
-                </NavigationMenuTrigger> */}
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4 grid-cols-2">
                     {serviceSliders.map((service) => (
@@ -145,14 +158,27 @@ export default function NavbarSection() {
           </NavigationMenu>
 
           <div className="flex items-center gap-4">
-            {/* <ModeToggle /> */}
+            {user && (
+              <h2 className="text-blue-500 font-bold">
+                {typeof user === "string" ? user : user?.name || "User"}
+              </h2>
+            )}
 
-            <Link href="/Signin" passHref legacyBehavior>
-              <Button className="bg-white text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-blue-500 transition-all duration-200 rounded-md px-6 py-2 text-sm font-medium">
-                Sign In
+            {user ? (
+              <Button
+                onClick={handleSignOut}
+                className="bg-white text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-blue-500 transition-all duration-200 rounded-md px-6 py-2 text-sm font-medium"
+              >
+                Sign Out
               </Button>
-            </Link>
-            {/* Mobile Nav */}
+            ) : (
+              <Link href="/Signin" passHref legacyBehavior>
+                <Button className="bg-white text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-blue-500 transition-all duration-200 rounded-md px-6 py-2 text-sm font-medium">
+                  Sign In
+                </Button>
+              </Link>
+            )}
+
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="lg:hidden">
@@ -163,7 +189,6 @@ export default function NavbarSection() {
                 <nav className="flex flex-col gap-4 mt-4">
                   {[
                     { href: "/", label: "Home" },
-
                     { href: "/Blog", label: "Blog" },
                     { href: "/pricing", label: "Pricing" },
                     { href: "/Clients", label: "ClIENTS" },

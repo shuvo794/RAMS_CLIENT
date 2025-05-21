@@ -18,3 +18,5 @@ export const CRETE_CONTUCTUS = `${BASE_URL}/contact/api/v1/contact/create/`;
 export const GET_BLOGS = `${BASE_URL}/blog/api/v1/blog/all/`;
 export const GET_BLOG = `${BASE_URL}/blog/api/v1/blog/`;
 export const GET_PATNERS = `${BASE_URL}/partner/api/v1/partner/all/`;
+export const LOGIN = `${BASE_URL}/user/api/v1/user/login/`;
+export const SIGNUP = `${BASE_URL}/client/api/v1/client/signup/`;

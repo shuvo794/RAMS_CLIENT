@@ -91,7 +91,7 @@ export default function Category2() {
           </div>
         ) : (
           blogs.map((blog) => {
-            const href = blog.slug ? `/blog/${blog.slug}` : `/blog/${blog.id}`;
+            const href = blog.slug ? `/Blog/${blog.slug}` : `/Blog/${blog.id}`;
             const imgSrc = blog.image?.startsWith("/media")
               ? `${BASE_URL}${blog.image}`
               : "/test.jpg";

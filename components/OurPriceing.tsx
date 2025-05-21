@@ -39,7 +39,7 @@ export default function OurPricing() {
   ];
 
   return (
-    <section className="bg-gray-100 py-16 px-4">
+    <section className=" py-16 px-4">
       <div className="text-center mb-12 max-w-3xl mx-auto">
         <h2 className="text-4xl font-bold mb-4">Pricing Plans</h2>
         <p className="text-gray-600">

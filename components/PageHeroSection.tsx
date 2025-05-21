@@ -20,12 +20,12 @@ export default function PageHeroSection({
 }: PageHeroSectionProps) {
   return (
     <div
-      className="relative h-[300px] flex items-center justify-center"
+      className="relative h-[200px] flex items-center justify-center"
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundAttachment: "scroll", // Changed from fixed to scroll
+        backgroundAttachment: "scroll",
         backgroundPosition: "center",
-        backgroundSize: "100% 100%", // Changed from cover to 100% width and height
+        backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
       }}
     >

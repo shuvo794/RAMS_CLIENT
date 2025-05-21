@@ -6,6 +6,7 @@ import PageHeroSection from "@/components/PageHeroSection";
 import { BASE_URL, GET_BLOG, GET_BLOGS } from "@/lib/config";
 import { Mail, Facebook, Twitter, Linkedin } from "lucide-react";
 import Image from "next/image";
+import { it } from "node:test";
 
 interface Blog {
   id: number;
@@ -18,6 +19,8 @@ interface Blog {
   site_link: string;
   tags?: string[];
   created_at: string;
+  recent_blogs: Blogs[]; // Add this line
+  blog: Blogs[];
 }
 
 interface Blogs {
@@ -37,6 +40,8 @@ export default function BlogItemPage() {
   const [blogs, setBlogs] = useState<Blogs[]>([]);
   const [, setIsLoading] = useState(true);
   const [, setError] = useState<string | null>(null);
+  const [recent, seRescent] = useState<Blogs[]>([]);
+  console.log("Blog ID:", blog);
 
   useEffect(() => {
     if (!id) return;
@@ -46,7 +51,8 @@ export default function BlogItemPage() {
         const response = await fetch(`${GET_BLOG}${id}`);
         if (!response.ok) throw new Error("Failed to fetch blog");
         const data = await response.json();
-        setBlog(data || null);
+        setBlog(data.blog || null);
+        seRescent(data.recent_blogs || []);
       } catch (error) {
         console.error("Error fetching blog:", error);
         setBlog(null);
@@ -140,12 +146,12 @@ export default function BlogItemPage() {
   return (
     <>
       <PageHeroSection
-        title={blog.title}
+        title=""
         backgroundImage="/half-circle-bg.png"
         breadcrumbs={[
           { label: "HOME", href: "/" },
           { label: "BLOG", href: "/Blog" },
-          { label: blog.title.toUpperCase(), href: `/Blog/${id}` },
+          // { label: blog.title.toUpperCase(), href: `/Blog/${id}` },
         ]}
       />
 
@@ -184,24 +190,11 @@ export default function BlogItemPage() {
                 <h2 className="text-2xl font-bold mb-4">{blog.title}</h2>
                 <p
                   className="text-gray-700 mb-4"
-                  dangerouslySetInnerHTML={{ __html: blog.description }}
+                  dangerouslySetInnerHTML={{
+                    __html: blog.description,
+                  }}
                 />
               </div>
-
-              {blog.tags && blog.tags.length > 0 && (
-                <div className="flex flex-wrap items-center gap-2 py-4 border-t border-gray-200">
-                  <span className="text-sm text-gray-600">Tags:</span>
-                  {blog.tags.map((tag, index) => (
-                    <a
-                      key={index}
-                      href="#"
-                      className="bg-gray-100 text-gray-700 hover:bg-blue-500 hover:text-white px-2 py-1 text-xs rounded transition duration-200"
-                    >
-                      {tag}
-                    </a>
-                  ))}
-                </div>
-              )}
             </div>
 
             <div className="w-full md:w-1/3">
@@ -214,7 +207,7 @@ export default function BlogItemPage() {
                 </h4>
                 <div className="h-1 w-10 bg-indigo-700 mb-4" />
                 <ul className="space-y-4">
-                  {blogs.map((post, index) => {
+                  {recent.map((post, index) => {
                     const blogUrl = post.slug
                       ? `/Blog/${post.slug}`
                       : `/Blog/${post.id}`;

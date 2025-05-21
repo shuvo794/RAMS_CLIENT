@@ -1,154 +1,136 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { LOGIN } from "@/lib/config";
+
+type LoginFormInputs = {
+  email: string;
+  password: string;
+};
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real application, you would handle authentication here
-    //   router.push('/dashboard');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>();
+
+  const onSubmit = async (data: LoginFormInputs) => {
+    console.log("Submitting data:", data);
+
+    try {
+      const response = await fetch(LOGIN, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("API validation errors:", errorData);
+        return;
+      }
+
+      const result = await response.json();
+
+      // Log and store token
+      console.log("Login successful", result);
+      if (result.access) {
+        localStorage.setItem("token", result.access);
+        console.log("Token stored:", localStorage.getItem("token"));
+      } else {
+        console.warn("No token received in login response");
+      }
+
+      if (result.first_name) {
+        localStorage.setItem("userName", result.first_name);
+      }
+
+      router.push("/");
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
 
   return (
     <div>
-      <div
+      <h2
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          fontSize: "2.5rem",
+          fontWeight: "800",
+          color: "#2563ea",
+          textAlign: "center",
           marginBottom: "1.5rem",
         }}
       >
-        <div style={{ width: "100%" }}>
-          <h2
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: "800",
-              color: "#2563ea",
-              textAlign: "center",
-            }}
-          >
-            Login
-          </h2>
-        </div>
+        Login
+      </h2>
 
-        {/* <button
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
+        <input
+          type="email"
+          placeholder="Enter Email/Username"
+          {...register("email", { required: true })}
           style={{
-            backgroundColor: "blue",
-            padding: "0.5rem 1rem",
+            width: "100%",
+            padding: "0.75rem",
             borderRadius: "4px",
-            textAlign: "center",
+            border: "1px solid #e2e8f0",
+            marginBottom: "1rem",
+          }}
+        />
 
+        <input
+          type="password"
+          placeholder="Enter Password"
+          {...register("password", { required: true })}
+          style={{
+            width: "100%",
+            padding: "0.75rem",
+            borderRadius: "4px",
+            border: "1px solid #e2e8f0",
+            marginBottom: "1rem",
+          }}
+        />
+
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: "0.75rem",
+            backgroundColor: "#2563ea",
+            color: "white",
             border: "none",
-            color: "#fff",
+            borderRadius: "4px",
             fontSize: "0.875rem",
+            fontWeight: "600",
+            cursor: "pointer",
+            marginBottom: "1rem",
+          }}
+        >
+          SIGN IN
+        </button>
+
+        <button
+          type="button"
+          onClick={() => router.push("/Signup")}
+          style={{
+            width: "100%",
+            padding: "0.75rem",
+            backgroundColor: "#2563ea",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            fontSize: "0.875rem",
+            fontWeight: "600",
             cursor: "pointer",
           }}
         >
-          Register
-        </button> */}
-      </div>
-
-      <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-        <div style={{ marginBottom: "1rem" }}>
-          <input
-            type="email"
-            placeholder="Enter Email/Username"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "0.75rem",
-              borderRadius: "4px",
-              border: "1px solid #e2e8f0",
-              marginBottom: "1rem",
-              fontSize: "0.875rem",
-              transition: "border-color 0.2s ease",
-            }}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "0.75rem",
-              borderRadius: "4px",
-              border: "1px solid #e2e8f0",
-              marginBottom: "0.5rem",
-              fontSize: "0.875rem",
-              transition: "border-color 0.2s ease",
-            }}
-            required
-          />
-        </div>
-
-        {/* <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginBottom: "1.5rem",
-          }}
-        >
-          <button
-            type="button"
-            style={{
-              backgroundColor: "transparent",
-              border: "none",
-              color: "#4361ee",
-              fontSize: "0.75rem",
-              cursor: "pointer",
-            }}
-          >
-            Forgot Password?
-          </button>
-        </div> */}
-        <Link href="/Signin" passHref legacyBehavior>
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              padding: "0.75rem",
-              backgroundColor: "#4361ee",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              fontSize: "0.875rem",
-              fontWeight: "500",
-              cursor: "pointer",
-              marginBottom: "1rem",
-              transition: "background-color 0.2s ease",
-            }}
-          >
-            SIGN IN
-          </button>
-        </Link>
-        <Link href="/Signup" passHref legacyBehavior>
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              padding: "0.75rem",
-              backgroundColor: "#4361ee",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              fontSize: "0.875rem",
-              fontWeight: "500",
-              cursor: "pointer",
-              marginBottom: "1rem",
-              transition: "background-color 0.2s ease",
-            }}
-          >
-            SIGN UP
-          </button>
-        </Link>
+          SIGN UP
+        </button>
       </form>
     </div>
   );
