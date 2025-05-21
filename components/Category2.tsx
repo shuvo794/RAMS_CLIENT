@@ -13,6 +13,7 @@ interface Blog {
   serial_number: number;
   page: number;
   total_pages: number;
+  link: string;
 }
 
 export default function Category2() {
@@ -94,24 +95,45 @@ export default function Category2() {
             const href = blog.slug ? `/Blog/${blog.slug}` : `/Blog/${blog.id}`;
             const imgSrc = blog.image?.startsWith("/media")
               ? `${BASE_URL}${blog.image}`
-              : "/test.jpg";
+              : "";
 
             return (
-              <Link key={blog.id} href={href} className="group block">
-                <div className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg h-[320px] flex flex-col">
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={imgSrc}
-                      alt={blog.title}
-                      fill
-                      className="object-cover rounded-t"
-                    />
-                  </div>
-                  <p className="p-2 text-xl font-bold text-gray-800 mt-auto">
-                    {blog.title}
-                  </p>
-                </div>
-              </Link>
+              <div key={blog.id} className="space-y-4">
+                <Link href={href} className="group block">
+                  {blog.title && imgSrc && (
+                    <div className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg h-[350px] flex flex-col">
+                      <div className="relative h-48 w-full">
+                        <Image
+                          src={imgSrc}
+                          alt={blog.title}
+                          fill
+                          className="object-cover rounded-t"
+                        />
+                      </div>
+
+                      <p className="p-2 text-xl font-bold text-gray-800 mt-auto">
+                        {blog.title}
+                      </p>
+                    </div>
+                  )}
+                  {blog.link && (
+                    <div
+                      className="wpo-features-item p-0"
+                      style={{ borderRadius: "20px" }}
+                    >
+                      <iframe
+                        // title={blog.title}
+                        src={blog.link}
+                        width="100%"
+                        height="350px"
+                        style={{ border: "none", overflow: "hidden" }}
+                        allowFullScreen={true}
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                      ></iframe>
+                    </div>
+                  )}
+                </Link>
+              </div>
             );
           })
         )}

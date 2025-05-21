@@ -6,7 +6,6 @@ import PageHeroSection from "@/components/PageHeroSection";
 import { BASE_URL, GET_BLOG, GET_BLOGS } from "@/lib/config";
 import { Mail, Facebook, Twitter, Linkedin } from "lucide-react";
 import Image from "next/image";
-import { it } from "node:test";
 
 interface Blog {
   id: number;
@@ -37,7 +36,7 @@ export default function BlogItemPage() {
   const { id } = useParams();
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
-  const [blogs, setBlogs] = useState<Blogs[]>([]);
+  const [, setBlogs] = useState<Blogs[]>([]);
   const [, setIsLoading] = useState(true);
   const [, setError] = useState<string | null>(null);
   const [recent, seRescent] = useState<Blogs[]>([]);
@@ -180,11 +179,11 @@ export default function BlogItemPage() {
                 </div>
               </div>
 
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <span className="bg-blue-100 text-blue-600 px-2 py-1 text-xs uppercase tracking-wide font-semibold rounded">
                   {blog.industry || "Category"}
                 </span>
-              </div>
+              </div> */}
 
               <div className="mb-6">
                 <h2 className="text-2xl font-bold mb-4">{blog.title}</h2>
@@ -211,6 +210,7 @@ export default function BlogItemPage() {
                     const blogUrl = post.slug
                       ? `/Blog/${post.slug}`
                       : `/Blog/${post.id}`;
+                    if (!post.title || !post.image) return null;
                     return (
                       <li key={index} className="flex gap-4">
                         <Image

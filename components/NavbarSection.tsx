@@ -34,7 +34,7 @@ export default function NavbarSection() {
   const [serviceSliders] = useState<Service[]>([]);
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<string | { name?: string } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -160,7 +160,11 @@ export default function NavbarSection() {
           <div className="flex items-center gap-4">
             {user && (
               <h2 className="text-blue-500 font-bold">
-                {typeof user === "string" ? user : user?.name || "User"}
+                {typeof user === "string"
+                  ? user
+                  : user && "name" in user
+                  ? user.name
+                  : "User"}
               </h2>
             )}
 

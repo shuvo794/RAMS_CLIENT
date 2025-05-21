@@ -16,7 +16,7 @@ export default function CreatPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {},
   } = useForm<SignUpFormInputs>();
 
   const onSubmit = async (data: SignUpFormInputs) => {
