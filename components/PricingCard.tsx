@@ -43,15 +43,14 @@ const PricingCard: React.FC<PricingCardProps> = ({
       ? hoverGradient
       : gradient;
 
-  // 🎯 FINAL SCALE LOGIC
   let scale = 1;
 
   if (hoveredTitle?.toLowerCase() === "basic") {
-    if (isPremium) scale = 1.05;
+    if (isPremium) scale = 1;
     else if (isBasic) scale = 1.1;
     else scale = 1;
   } else if (hoveredTitle?.toLowerCase() === "standard") {
-    if (isPremium) scale = 1.05;
+    if (isPremium) scale = 1;
     else if (isStandard) scale = 1.1;
     else scale = 1;
   } else if (hoveredTitle?.toLowerCase() === "premium") {
