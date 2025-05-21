@@ -54,7 +54,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
     else if (isStandard) scale = 1.1;
     else scale = 1;
   } else if (hoveredTitle?.toLowerCase() === "premium") {
-    if (isPremium) scale = 1.05;
+    if (isPremium) scale = 1.1;
   } else {
     scale = isPremium ? 1.05 : 1;
   }
@@ -85,7 +85,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
       </div>
 
       {/* Body */}
-      <div className="bg-white p-6 text-center flex flex-col justify-between min-h-[550px]">
+      <div className="bg-white p-6 text-center flex flex-col justify-between min-h-[380px]">
         <p className="text-sm text-gray-600 mb-6">{description}</p>
         <ul className="mb-6 text-left space-y-3">
           {features.map((feature, index) => {
