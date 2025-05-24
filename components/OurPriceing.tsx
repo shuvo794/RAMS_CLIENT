@@ -1,46 +1,53 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PricingCard from "./PricingCard";
+import { PLANSALL } from "@/lib/config";
+
+type Plan = {
+  id: number;
+  title: string;
+  description?: string;
+  price?: number;
+  serial_number: number;
+  name: string;
+  period: string;
+  features: string[];
+};
 
 export default function OurPricing() {
   const [hoveredTitle, setHoveredTitle] = useState<string | null>(null);
+  const [plans, setPlans] = useState<Plan[]>([]);
+  const [, setIsLoading] = useState(true);
+  const [, setError] = useState<string | null>(null);
 
-  const plans = [
-    {
-      title: "Basic",
-      price: 15,
-      period: "Per Month",
-      description: "Best for individuals",
-      features: ["1 Page", "Responsive Design", "Billing", "Upload"],
-      btnColor: "bg-gray-600 text-white",
-      gradient: "from-blue-100 to-blue-300",
-      hoverGradient: "from-blue-400 to-blue-700",
-    },
-    {
-      title: "Premium",
-      price: 30,
-      period: "Per Month",
-      description: "Most popular choice",
-      features: ["10 Pages", "Responsive Design", "Reports", "Upload"],
-      btnColor: "bg-blue-600 text-white",
-      gradient: "from-blue-400 to-blue-700",
-      hoverGradient: "from-blue-400 to-blue-700",
-    },
-    {
-      title: "Standard",
-      price: 50,
-      period: "Per Month",
-      description: "For small teams",
-      features: ["5 Pages", "Responsive Design", "Billing", "Upload"],
-      btnColor: "bg-gray-600 text-white",
-      gradient: "from-blue-100 to-blue-300",
-      hoverGradient: "from-blue-400 to-blue-700",
-    },
-  ];
+  useEffect(() => {
+    const fetchServiceSliders = async () => {
+      try {
+        const response = await fetch(PLANSALL);
+        if (!response.ok) {
+          throw new Error("Failed to fetch service sliders");
+        }
+        const data = await response.json();
+        if (data && data?.package_types) {
+          const sortedSliders = [...data.package_types].sort(
+            (a, b) => a.serial_number - b.serial_number
+          );
+          setPlans(sortedSliders);
+        }
+      } catch (err) {
+        console.error("Error fetching service sliders:", err);
+        setError("Failed to load services");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchServiceSliders();
+  }, []);
 
   return (
-    <section className=" py-16 px-4">
-      <div className="text-center mb-12 max-w-3xl mx-auto">
+    <section className="py-16 px-4">
+      <div className="text-center mb-24 max-w-3xl mx-auto">
         <h2 className="text-4xl font-bold mb-4">Pricing Plans</h2>
         <p className="text-gray-600">
           Choose a plan that fits your needs. Hover over the cards to explore
@@ -48,13 +55,18 @@ export default function OurPricing() {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
-        {plans.map((plan) => (
+      <div className="flex flex-col md:flex-row gap-3  items-center justify-center">
+        {plans?.map((plan) => (
           <PricingCard
-            key={plan.title}
-            {...plan}
+            key={plan.id}
+            name={plan.name}
+            period={plan.period}
+            features={plan.features}
+            price={plan.price ?? 0}
+            description={plan.description ?? ""}
             hoveredTitle={hoveredTitle}
             setHoveredTitle={setHoveredTitle}
+            id={plan.id}
           />
         ))}
       </div>

@@ -20,3 +20,5 @@ export const GET_BLOG = `${BASE_URL}/blog/api/v1/blog/`;
 export const GET_PATNERS = `${BASE_URL}/partner/api/v1/partner/all/`;
 export const LOGIN = `${BASE_URL}/user/api/v1/user/login/`;
 export const SIGNUP = `${BASE_URL}/client/api/v1/client/signup/`;
+export const PLANSALL = `${BASE_URL}/package_type/api/v1/package_type/all/`;
+export const fetureSingelGet = `${BASE_URL}/package_type/api/v1/feature_customization/`;

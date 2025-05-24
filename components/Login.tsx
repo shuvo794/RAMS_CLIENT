@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { LOGIN } from "@/lib/config";
+import Swal from "sweetalert2";
 
 type LoginFormInputs = {
   email: string;
@@ -36,20 +37,30 @@ export default function LoginPage() {
 
       const result = await response.json();
 
-      // Log and store token
-      console.log("Login successful", result);
       if (result.access) {
         localStorage.setItem("token", result.access);
-        console.log("Token stored:", localStorage.getItem("token"));
-      } else {
-        console.warn("No token received in login response");
       }
 
       if (result.first_name) {
         localStorage.setItem("userName", result.first_name);
       }
 
-      router.push("/");
+      Swal.fire({
+        title: "Login Successful!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2000,
+      }).then(() => {
+        // 🔴 Check for previously saved pricingId
+        const savedPricingId = localStorage.getItem("pricingId");
+
+        if (savedPricingId) {
+          localStorage.removeItem("pricingId"); // cleanup
+          router.push(`/pricing/${savedPricingId}`);
+        } else {
+          router.push("/");
+        }
+      });
     } catch (error) {
       console.error("Login error:", error);
     }
