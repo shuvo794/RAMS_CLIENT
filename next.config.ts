@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "api.bluebayit.com",
+        hostname: "api.ramsint.com",
       },
       {
         protocol: "http",

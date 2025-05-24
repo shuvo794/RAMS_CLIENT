@@ -1,5 +1,12 @@
-// export const BASE_URL = "https://api.bluebayit.com";
-export const BASE_URL = "http://192.168.68.137:8010";
+// export const BASE_URL = "https://api.ramsint.com";
+// export const BASE_URL = "http://192.168.68.137:8010";
+
+const isProduction = process.env.NODE_ENV === "production";
+
+export const BASE_URL = isProduction
+  ? "https://api.ramsint.com/"
+  : "http://192.168.68.137:8010";
+
 // export const GET_HOMEPAGE_SLIDER = `${BASE_URL}/homepage_slider/api/v1/first_homepage_slider/`;
 export const GET_BANNER = `${BASE_URL}/banner/api/v1/banner/all/`;
 
