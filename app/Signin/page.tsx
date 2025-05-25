@@ -15,8 +15,6 @@ const page = () => {
       }}
     >
       <div className="flex flex-col md:flex-row w-full max-w-6xl rounded-2xl shadow-2xl overflow-hidden bg-white">
-        {/* Left Section */}
-
         {/* Back Button */}
         <button
           onClick={() => window.history.back()}
@@ -24,8 +22,10 @@ const page = () => {
         >
           ← Back
         </button>
+
+        {/* Left Section: Hidden on mobile */}
         <Card
-          className="flex flex-col flex-1 items-center justify-center border-0 rounded-none p-12"
+          className="hidden md:flex flex-col flex-1 items-center justify-center border-0 rounded-none p-12"
           style={{
             background:
               "linear-gradient(45deg, #488fed 0%, #291fbc 51%, #0f0786 100%)",
@@ -38,9 +38,9 @@ const page = () => {
                 animation: "fadeIn 1s ease-in-out",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center", // centers items horizontally
+                alignItems: "center",
                 justifyContent: "center",
-                textAlign: "center", // centers text
+                textAlign: "center",
                 padding: "2rem",
               }}
             >
@@ -79,15 +79,14 @@ const page = () => {
           </CardContent>
         </Card>
 
-        {/* Right Section */}
-        <div className="flex flex-1 items-center justify-center p-12 border-t md:border-t-0 md:border-l border-gray-200">
+        {/* Right Section: Full width on mobile */}
+        <div className="w-full md:flex-1 flex items-center justify-center p-6 md:p-12 border-t md:border-t-0 md:border-l border-gray-200 bg-white">
           <LoginPage />
         </div>
       </div>
-      {/* Footer */}
 
-      {/* Bottom Bar */}
-      <div className=" text-gray-400 py-4">
+      {/* Footer */}
+      <div className="text-gray-400 py-4">
         <div className="container mx-auto flex items-center justify-center px-4">
           <p className="text-sm text-center">
             © 2025{" "}

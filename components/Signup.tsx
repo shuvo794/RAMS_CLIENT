@@ -526,12 +526,6 @@ export default function CreatPage() {
         icon: "success",
         showConfirmButton: false, // 🔵 No confirm button
         timer: 2000, // Optional: auto close after 2 seconds
-        // didOpen: () => {
-        //   const title = Swal.getTitle();
-        //   if (title) {
-        //     title.style.color = "#2563ea"; // 🔵 Set title color to blue
-        //   }
-        // },
       }).then(() => {
         router.push("/");
       });
